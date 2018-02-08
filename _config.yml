@@ -14,7 +14,8 @@ title:               Bioestadística
 tagline:             'Universidad Nacional de Colombia - sede Medellín'
 description:         'Universidad Nacional de Colombia <br>
                       Facultad de Ciencias Agrarias<br>
-                      Sitio web creado con Jekyll y el tema Lanyon, hecho por <a href="https://github.com/mdo" target="_blank">@mdo</a>.'
+                      Sitio web creado con Jekyll y el tema Lanyon, hecho por <a href="https://github.com/mdo" target="_blank">@mdo</a>.<br>
+                      Código fuente disponible en <a href="https://github.com/Bioestadistica" target="_blank">github.</a>'
 url:                 
 baseurl:             ''
 paginate:            5
