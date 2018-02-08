@@ -1,0 +1,29 @@
+# Dependencies
+plugins:
+  - jekyll-paginate
+  - redcarpet
+  - jekyll-gist
+  - pygments.rb
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+
+# Setup
+title:               Bioestadística
+tagline:             'Universidad Nacional de Colombia - sede Medellín'
+description:         'Universidad Nacional de Colombia <br>
+                      Facultad de Ciencias Agrarias<br>
+                      Sitio web creado con Jekyll y el tema Lanyon, hecho por <a href="https://github.com/mdo" target="_blank">@mdo</a>.'
+url:                 
+baseurl:             ''
+paginate:            5
+
+# About/contact
+author:
+  name:              
+  url:               
+  email:             
+
+# Custom vars
+version:             1.0.0
