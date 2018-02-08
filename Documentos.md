@@ -8,7 +8,7 @@ En esta sección el usuario podrá encontrar material bibliogŕafico de apoyo pa
 # Documentos introductorios
 
 - [La estadística, una ciencia del siglo XX](/Literatura/EstadisticaSigloXX.pdf)
-- [Progeso estadístico en la evaluación del desarrollo](/Literatura/ProgresoEstadistico.pdf)
+- [Progreso estadístico en la evaluación del desarrollo](/Literatura/ProgresoEstadistico.pdf)
 - [Papel de la estadística en la investigación científica](/Literatura/EstadisticaInvestigacionCientifica.pdf)
 - [Introducción a la bioestadística](/Literatura/Introduccion.pdf)
 - [Estadística aplicada a la Ingeniería Agrícola y Ciencias Agropecuarias](/Literatura/EstadisticaCienciasAgrarias.pdf)
