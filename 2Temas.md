@@ -4,7 +4,7 @@ title: Temas
 ---
 
 # Introducción
-- [Conceptos básicos y áreas de estudio](/Temas/)
+- [Conceptos básicos y áreas de estudio](/Temas/1_Introduccion.html)
 - [Población y muestra. Variable aleatoria y escalas de medición](/Temas/)
 
 # Descriptiva 
