@@ -21,7 +21,7 @@ title: Temas
 - [Varianza](/Temas/)
 
 # Funciones de probabilidad
-- [Distribucíones discretas (Bernoulli, Binomial y Poisson)](/Temas/)
+- [Distribuciones discretas (Bernoulli, Binomial y Poisson)](/Temas/)
 - [Distribuciones continuas](/Temas/)
 - [Distribuciones derivadas del muestreo](/Temas/)
 - [Distribución de la media muestral](/Temas/)
