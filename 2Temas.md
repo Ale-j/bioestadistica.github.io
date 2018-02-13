@@ -5,10 +5,10 @@ title: Temas
 
 # Introducción
 - [Conceptos básicos y áreas de estudio](/Temas/1_Introduccion.html)
-- [Población y muestra](/Temas/)
+- [Población y muestra](/Temas/2_PoblacionMuestra.html)
 
 # Descriptiva 
-- [Estadísticos](/Temas/)
+- [Estadísticos](/Temas/3_Estadisticos.html)
 - [Tablas y gráficos](/Temas/)
 - [Transformaciones](/Temas/)
 
