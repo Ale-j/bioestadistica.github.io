@@ -6,11 +6,13 @@ title: Temas
 # Introducción
 - [Conceptos básicos y áreas de estudio](/Temas/1_Introduccion.html)
 - [Población y muestra](/Temas/2_PoblacionMuestra.html)
+- [Descargar](/Temas/Introductorios.zip)
 
 # Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.html)
-- [Tablas y gráficos](/Temas/)
-- [Transformaciones](/Temas/)
+- [Introducción a R](/Temas/IntroR.html)
+- [Tablas y gráficos](/Temas/4_TablasGraficos.html)
+
 
 # Probabilidad
 - [Conceptos básicos, experimento aleatorio](/Temas/)
