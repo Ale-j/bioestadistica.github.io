@@ -16,11 +16,9 @@ En esta sección el usuario podrá encontrar material bibliogŕafico de apoyo pa
 
 # Documentos estadística descriptiva
 
-- [Documento 1](/Literatura/)
-- [Documento 2](/Literatura/)
-- [Documento 3](/Literatura/)
-- [Documento 4](/Literatura/)
-- [Documento 5](/Literatura/)
+- [Estadstica descriptiva y selección de prueba](/Literatura/Descriptiva1_articulo.pdf)
+- [Tablas y gráficos como objetos culturales](/Literatura/Descriptiva2_articulo.pdf)
+- [Gráficos Estadísticos con R](https://cran.r-project.org/doc/contrib/grafi3.pdf)
 
 # Documentos probabilidad
 
