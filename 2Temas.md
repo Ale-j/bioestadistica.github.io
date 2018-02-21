@@ -10,8 +10,10 @@ title: Temas
 
 # Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.html)
-- [Introducción a R](/Temas/IntroR.html)
 - [Tablas y gráficos](/Temas/4_TablasGraficos.html)
+- [Introducción a R](/Temas/IntroR.html)
+- [Descriptiva con R](/Temas/DescriptivaR.html)
+- [Resultados encuesta](/Temas/Encuesta.zip)
 
 
 # Probabilidad
