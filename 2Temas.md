@@ -8,7 +8,7 @@ title: Temas
 - [Población y muestra](/Temas/2_PoblacionMuestra.html)
 - [Descargar](/Temas/Introductorios.zip)
 
-# Descriptiva 
+# Estadística Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.html)
 - [Tablas y gráficos](/Temas/4_TablasGraficos.html)
 - [Introducción a R](/Temas/IntroR.html)
