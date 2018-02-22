@@ -12,7 +12,7 @@ title: Temas
 - [Estadísticos](/Temas/3_Estadisticos.html)
 - [Tablas y gráficos](/Temas/4_TablasGraficos.html)
 - [Introducción a R](/Temas/IntroR.html)
-- [Descriptiva con R](/Temas/DescriptivaR.html)
+- [Descriptiva con R](/Temas/5_DescriptivaR.html)
 - [Resultados encuesta](/Temas/Encuesta.zip)
 
 
