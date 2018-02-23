@@ -14,6 +14,7 @@ title: Temas
 - [Introducción a R](/Temas/IntroR.html)
 - [Descriptiva con R](/Temas/5_DescriptivaR.html)
 - [Resultados encuesta](/Temas/Encuesta.zip)
+- [Descargar](/Temas/Descriptiva.zip)
 
 
 # Probabilidad
