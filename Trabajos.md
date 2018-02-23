@@ -21,7 +21,8 @@ title: Trabajos
 
 # Talleres
 
-- [Taller 1. Estadística descriptiva.](/Talleres/)
+- [Taller 1. Estadística descriptiva [G4]](/Talleres/Taller1_G4.zip)
+- [Taller 1. Estadística descriptiva [G5]](/Talleres/Taller1_G5.zip)
 - [Taller 2. Probabilidad.](/Talleres/)
 - [Taller 3. Funciones de probabilidad.](/Talleres/)
 - [Taller 4. Inferencia estadística.](/Talleres/)
