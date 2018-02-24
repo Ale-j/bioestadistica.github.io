@@ -11,7 +11,7 @@ title: Trabajos
 - Taller inferencia estadística (10%)
 - Exposición estadística descriptiva (15%)
 - Exposición inferencia estadística (15%)
-- Poster científico (30%)
+- Póster científico (30%)
 
 # Políticas del curso
 
