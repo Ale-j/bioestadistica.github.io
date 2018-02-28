@@ -26,6 +26,7 @@ title: Trabajos
 - [Taller 2. Probabilidad.](/Talleres/)
 - [Taller 3. Funciones de probabilidad.](/Talleres/)
 - [Taller 4. Inferencia estadística.](/Talleres/)
+- [Guía Proyectos, RMarkdown e Instalación de paquetes](/Talleres/Guia_R.html)
 
 # Exposiciones
 
