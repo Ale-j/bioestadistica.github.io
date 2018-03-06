@@ -18,8 +18,7 @@ title: Temas
 
 
 # Probabilidad
-- [Conceptos básicos, experimento aleatorio](/Temas/)
-- [Espacio muestral, eventos y relaciones entre eventos](/Temas/)
+- [Conjuntos, eventos y relaciones entre eventos, experimento aleatorio, espacio muestral](/Temas/6_IntroProbabilidad.html)
 - [Definición de probabilidad, algebra de probabilidades y variable aleatoria](/Temas/)
 - [Funciones de probabilidad](/Temas/)
 - [Esperanza matemática](/Temas/)
