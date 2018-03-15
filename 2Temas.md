@@ -19,10 +19,9 @@ title: Temas
 
 # Probabilidad
 - [Conjuntos, eventos y relaciones entre eventos, experimento aleatorio, espacio muestral](/Temas/6_IntroProbabilidad.html)
-- [Definición de probabilidad, algebra de probabilidades y variable aleatoria](/Temas/7_Probabilidad.html)
-- [Funciones de probabilidad](/Temas/)
-- [Esperanza matemática](/Temas/)
-- [Varianza](/Temas/)
+- [Definición de probabilidad y álgebra de probabilidades](/Temas/7_Probabilidad.html)
+- [Variable aleatoria, funciones de probabilidad, esperanza matemática y varianza](/Temas/)
+- [Descargar](/Temas/)
 
 # Funciones de probabilidad
 - [Distribuciones discretas (Bernoulli, Binomial y Poisson)](/Temas/)
