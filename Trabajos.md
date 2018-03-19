@@ -23,7 +23,7 @@ title: Trabajos
 
 - [Taller 1. Estadística descriptiva [G4]](/Talleres/Taller1_G4.zip)
 - [Taller 1. Estadística descriptiva [G5]](/Talleres/Taller1_G5.zip)
-- [Taller 2. Probabilidad.](/Talleres/)
+- [Taller 2. Probabilidad[G4-G5].](/Talleres/Taller2_G4G5.pdf)
 - [Taller 3. Funciones de probabilidad.](/Talleres/)
 - [Taller 4. Inferencia estadística.](/Talleres/)
 - [Guía Proyectos, RMarkdown e Instalación de paquetes](/Talleres/Guia_R.html)
