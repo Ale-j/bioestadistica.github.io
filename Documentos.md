@@ -22,11 +22,9 @@ En esta sección el usuario podrá encontrar material bibliogŕafico de apoyo pa
 
 # Documentos probabilidad
 
-- [Documento 1](/Literatura/)
-- [Documento 2](/Literatura/)
-- [Documento 3](/Literatura/)
-- [Documento 4](/Literatura/)
-- [Documento 5](/Literatura/)
+- [Curso elemental de probabilidad y estadística (UNAM)](http://www.cimat.mx/~pabreu/LuisRinconI.pdf)
+- [Introducción al cálculo de probabilidades a través de casos reales](http://optimierung.mathematik.uni-kl.de/mamaeusch/veroeffentlichungen/ver_texte/prob_spanish.pdf)
+- [La historia de la probabilidad](http://www.redalyc.org/pdf/2950/295026121011.pdf)
 
 # Documentos funciones de probabilidad
 
