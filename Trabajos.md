@@ -30,8 +30,8 @@ title: Trabajos
 
 # Exposiciones
 
-- [Directrices exposición](/Talleres/)
-- [Exposición 1. Estadística descriptiva.](/Talleres/)
+- [Exposición 1. Estadística descriptiva.](/Talleres/Datos_1Exp.pdf)
+    - [Datos](/Talleres/Datos.zip)
 - [Exposición 2. Inferencia estadística.](/Talleres/)
 
 # Poster científico
