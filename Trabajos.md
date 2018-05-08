@@ -5,11 +5,10 @@ title: Trabajos
 
 # Evaluación del curso
 
-- Taller estadística descriptiva (10%)
+- Taller estadística descriptiva (15%)
 - Taller probabilidad (10%)
-- Taller funciones de probabilidad (10%)
 - Taller inferencia estadística (10%)
-- Exposición estadística descriptiva (15%)
+- Exposición estadística descriptiva (20%)
 - Exposición inferencia estadística (15%)
 - Póster científico (30%)
 
@@ -24,8 +23,7 @@ title: Trabajos
 - [Taller 1. Estadística descriptiva [G4]](/Talleres/Taller1_G4.zip)
 - [Taller 1. Estadística descriptiva [G5]](/Talleres/Taller1_G5.zip)
 - [Taller 2. Probabilidad[G4-G5].](/Talleres/Taller2_G4G5.pdf)
-- [Taller 3. Funciones de probabilidad.](/Talleres/)
-- [Taller 4. Inferencia estadística.](/Talleres/)
+- [Taller 3. Inferencia estadística.](/Talleres/)
 - [Guía Proyectos, RMarkdown e Instalación de paquetes](/Talleres/Guia_R.html)
 
 # Exposiciones
