@@ -35,11 +35,9 @@ En esta sección el usuario podrá encontrar material bibliogŕafico de apoyo pa
 
 # Documentos inferencia estadística
 
-- [Documento 1](/Literatura/)
-- [Documento 2](/Literatura/)
-- [Documento 3](/Literatura/)
-- [Documento 4](/Literatura/)
-- [Documento 5](/Literatura/)
+- [Estadística para las ciencias agropecuarias (libro)](http://aulavirtual.agro.unlp.edu.ar/pluginfile.php/2968/mod_resource/content/0/Estadistica_para_las_Ciencias_Agropecuarias_-_Di_Rienzo.pdf)
+- [Introducción a la inferencia estadística](http://biplot.usal.es/problemas/confianza/INFERENCIA.pdf)
+- [Inferencia estadística](http://sauce.pntic.mec.es/~jpeo0002/Archivos/PDF/T04.pdf)
 
 # Documentos software R
 
