@@ -28,11 +28,10 @@ En esta sección el usuario podrá encontrar material bibliogŕafico de apoyo pa
 
 # Documentos funciones de probabilidad
 
-- [Documento 1](/Literatura/)
-- [Documento 2](/Literatura/)
-- [Documento 3](/Literatura/)
-- [Documento 4](/Literatura/)
-- [Documento 5](/Literatura/)
+- [Algunas distribuciones de probabilidad](http://www.franciscojaviercruzariza.com/attachments/File/Distribuciones_de_Probabilidad.pdf)
+- [Distribuciones de probabilidad discretas y continuas](http://biplot.usal.es/problemas/libro/3%20Distribuciones.pdf)
+- [Distribuciones de probabilidad](https://s3.amazonaws.com/academia.edu.documents/40665571/Distribuciones_discretas_y_continuas.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1525796768&Signature=yMP0BJ%2FgfeowQ8LarI9X75aO5%2B8%3D&response-content-disposition=inline%3B%20filename%3DDistribuciones_discretas_y_continuas.pdf)
+- [Distribuciones de probabilidad (caso aplciado)](http://revistas.udistrital.edu.co/ojs/index.php/Tecnura/article/view/6962/8626)
 
 # Documentos inferencia estadística
 
