@@ -24,7 +24,7 @@ title: Temas
     - [Ejemplos y ejercicios (discretas y continuas)](/Temas/8.1_Ejercicios.pdf)
 - [Descargar](/Temas/Probabilidad.zip)
 
-# Funciones de probabilidad
+# Distribuciones de probabilidad
 - [Distribuciones discretas I (Bernoulli, Binomial y Poisson)](/Temas/9_Discretas.html)
 - [Distribuciones discretas II (Geométrica, Hipergeométrica y B. Negativa)](/Temas/9.1_Discretas.html)
     - [Ejercicios](/Temas/9.2_Ejercicios.pdf)
