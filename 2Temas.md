@@ -28,7 +28,7 @@ title: Temas
 - [Distribuciones discretas I (Bernoulli, Binomial y Poisson)](/Temas/9_Discretas.html)
 - [Distribuciones discretas II (Geométrica, Hipergeométrica y B. Negativa)](/Temas/9.1_Discretas.html)
     - [Ejercicios](/Temas/9.2_Ejercicios.pdf)
-- [Distribuciones continuas](/Temas/)
+- [Distribuciones continuas](/Temas/10_Continuas.html)
 - [Distribuciones derivadas del muestreo](/Temas/)
 - [Distribución de la media muestral](/Temas/)
 - [Distribución de la diferecia de medias](/Temas/)
