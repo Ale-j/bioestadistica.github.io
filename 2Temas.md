@@ -33,7 +33,7 @@ title: Temas
 - [Distribución de la media muestral](/Temas/)
 - [Distribución de la diferecia de medias](/Temas/)
 - Tablas de distribuciones
-    - [Tabla Z](/Temas/z.pdf)
+    - [Tabla Z](/Temas/Z.pdf)
     - [Tabla F-Snedecor](/Temas/F.pdf)
     - [Tabla Chi Cuadrado](/Temas/Jicuadrado.pdf)
     - [Tabla t-Student](/Temas/t.pdf)
