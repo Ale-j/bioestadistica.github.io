@@ -32,6 +32,11 @@ title: Temas
 - [Distribuciones derivadas del muestreo](/Temas/)
 - [Distribución de la media muestral](/Temas/)
 - [Distribución de la diferecia de medias](/Temas/)
+- Tablas de distribuciones
+    - [Tabla Z](/Temas/z.pdf)
+    - [Tabla F-Snedecor](/Temas/F.pdf)
+    - [Tabla Chi Cuadrado](/Temas/Jicuadrado.pdf)
+    - [Tabla t-Student](/Temas/t.pdf)
 
 # Inferencia estadística
 - [Estimación puntual: minimos cuadrados, máxima verosimilitud](/Temas/)
