@@ -29,9 +29,7 @@ title: Temas
 - [Distribuciones discretas II (Geométrica, Hipergeométrica y B. Negativa)](/Temas/9.1_Discretas.html)
     - [Ejercicios](/Temas/9.2_Ejercicios.pdf)
 - [Distribuciones continuas](/Temas/10_Continuas.html)
-- [Distribuciones derivadas del muestreo](/Temas/)
-- [Distribución de la media muestral](/Temas/)
-- [Distribución de la diferecia de medias](/Temas/)
+- [Distribuciones derivadas del muestreo](/Temas/11_Muestreo.html)
 - Tablas de distribuciones
     - [Tabla Z](/Temas/Z.pdf)
     - [Tabla F-Snedecor](/Temas/F.pdf)
