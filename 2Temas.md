@@ -37,8 +37,7 @@ title: Temas
     - [Tabla t-Student](/Temas/t.pdf)
 
 # Inferencia estadística
-- [Estimación puntual: minimos cuadrados, máxima verosimilitud](/Temas/)
-- [Estimación por intervalos de confianza: Para la media, varianza y proporciones](/Temas/)
+- [Estimación de parámetros: Para la media, varianza y proporciones](/Temas/12_Intervalos.html)
 - [Pruebas de hipótesis: tipos de errores, hipótesis sobre la media](/Temas/)
 - [Pruebas de hipótesis: hipótesis sobre la varianza, homocedasticidad](/Temas/)
 - [Pruebas de hipótesis: hipótesis acerca de la diferencia de medias - muestras independientes y pareadas](/Temas/)
