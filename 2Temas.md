@@ -38,7 +38,7 @@ title: Temas
 
 # Inferencia estadística
 - [Estimación de parámetros: Para la media, varianza y proporciones](/Temas/12_Intervalos.html)
-- [Pruebas de hipótesis: tipos de errores, hipótesis sobre la media](/Temas/)
-- [Pruebas de hipótesis: hipótesis sobre la varianza, homocedasticidad](/Temas/)
-- [Pruebas de hipótesis: hipótesis acerca de la diferencia de medias - muestras independientes y pareadas](/Temas/)
-- [Tablas de contingencia](/Temas/)
+- [Pruebas de hipótesis](/Temas/13_PruebasHipotesis.html)
+    - [Ejemplos (I)](/Temas/13.1_Ejemplos1.html)
+    - [Ejemplos (II)](/Temas/13.2_Ejemplos2.html)
+
