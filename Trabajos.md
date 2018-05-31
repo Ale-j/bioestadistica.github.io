@@ -7,10 +7,9 @@ title: Trabajos
 
 - Taller estadística descriptiva (15%)
 - Taller probabilidad (10%)
-- Taller inferencia estadística (10%)
+- Taller inferencia estadística (15%)
 - Exposición estadística descriptiva (20%)
-- Exposición inferencia estadística (15%)
-- Trabajo final escrito (30%)
+- Trabajo final escrito (40%)
 
 # Políticas del curso
 
@@ -30,7 +29,6 @@ title: Trabajos
 
 - [Exposición 1. Estadística descriptiva.](/Talleres/Datos_1Exp.pdf)
     - [Datos](/Talleres/Datos.zip)
-- [Exposición 2. Inferencia estadística.](/Talleres/)
 
 # Poster científico
 
