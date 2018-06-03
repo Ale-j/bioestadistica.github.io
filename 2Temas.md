@@ -35,10 +35,11 @@ title: Temas
     - [Tabla F-Snedecor](/Temas/F.pdf)
     - [Tabla Chi Cuadrado](/Temas/Jicuadrado.pdf)
     - [Tabla t-Student](/Temas/t.pdf)
+- [Descargar](/Temas/Distribuciones.zip)
 
 # Inferencia estadística
 - [Estimación de parámetros: Para la media, varianza y proporciones](/Temas/12_Intervalos.html)
 - [Pruebas de hipótesis](/Temas/13_PruebasHipotesis.html)
 - [Ejemplos (I)](/Temas/13.1_Ejemplos1.html)
 - [Ejemplos (II)](/Temas/13.2_Ejemplos2.html)
-
+- [Descargar](/Temas/Inferencia.zip)
