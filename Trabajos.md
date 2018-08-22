@@ -5,35 +5,20 @@ title: Trabajos
 
 # Evaluación del curso
 
-- Taller estadística descriptiva (15%)
-- Taller probabilidad (10%)
-- Taller inferencia estadística (15%)
-- Exposición estadística descriptiva (20%)
+- Talleres en clase (30%)
+- Talleres y tareas grupales (30%)
 - Trabajo final escrito (40%)
 
 # Políticas del curso
 
 - Toda entrega se realizará al correo **edavidja@unal.edu.co**.
 - El asunto de cada correo siempre deberá ser **[Bioestadística1]**.
-- Los grupos de trabajo serán máximo de 3 personas.
+- Los grupos de trabajo serán máximo de 2 personas.
 
-# Talleres
+# Talleres en clase
 
-- [Taller 1. Estadística descriptiva [G4]](/Talleres/Taller1_G4.zip)
-- [Taller 1. Estadística descriptiva [G5]](/Talleres/Taller1_G5.zip)
-- [Taller 2. Probabilidad[G4-G5].](/Talleres/Taller2_G4G5.pdf)
-- [Taller 3. Inferencia estadística.](/Talleres/Taller_Inferencia.pdf)
-- [Guía Proyectos, RMarkdown e Instalación de paquetes](/Talleres/Guia_R.html)
+# Talleres y tareas grupales
 
 # Exposiciones
 
-- [Exposición 1. Estadística descriptiva.](/Talleres/Datos_1Exp.pdf)
-    - [Datos](/Talleres/Datos.zip)
-
-# Poster científico
-
-- [Póster: definición y conceptos básicos](/Talleres/poster_cientifico.pdf)
-- [Presentación de póster científico](/Talleres/poster.pdf)
-- [Guía rápida de construcción del póster](/Talleres/Guia.pdf)
-- [Guía para el desarrollo de póster de investigación](/Talleres/posterInvestigacion.pdf)
-- [Guía pósters científicos](/Talleres/Guia_poster2.pdf)
+# Trabajo final
