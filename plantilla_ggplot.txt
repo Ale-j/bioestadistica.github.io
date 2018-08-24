@@ -1,0 +1,11 @@
+##
+
+\footnotesize
+```{r, prueba, echo=TRUE}
+library(ggplot2)
+
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point() +
+  labs(x = "Eje x", y = "Eje y", title = "Simulación") +
+  tema_gg
+```

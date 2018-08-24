@@ -1,0 +1,13 @@
+\ifdefined\knitrout
+\renewenvironment{knitrout}{\begin{footnotesize}}{\end{footnotesize}}
+\else
+\fi
+
+\makeatletter
+\let\oldalltt\alltt
+\def\alltt{\@ifnextchar[\alltt@i \alltt@ii}
+\def\alltt@i[#1]{\oldalltt[#1]\footnotesize}
+\def\alltt@ii{\oldalltt\footnotesize}
+\makeatother
+
+\renewcommand{\contentsname}{Contenido}

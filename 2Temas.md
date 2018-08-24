@@ -5,7 +5,7 @@ title: Temas
 
 # Introducción
 - [Conceptos básicos y áreas de estudio](/Temas/1_Introduccion.html)
-- [Población y muestra](/Temas/2_PoblacionMuestra.html)
+- [Población y muestra](/Temas/2_PoblacionMuestra.pdf)
 - [Descargar](/Temas/Introductorios.zip)
 
 # Estadística Descriptiva 
