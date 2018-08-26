@@ -5,7 +5,7 @@ title:  Información del curso
 
 # Descripción de la asignatura
 
-El curso está dirigido a adquirir los elementos fundamentales de la estadística, de tal forma que  el estudiante se convierta en un interlocutor válido con sus pares, y le permita establecer una posición crítica frente a resultados de investigaciones en su disciplina o en otras áreas del conocimiento.  También se pretende hacer que el estudiante se apropie de los elementos que le permitan analizar situaciones específicas con un enfoque estadístico adecuado.  
+El curso está dirigido a adquirir los elementos fundamentales de la estadística, de tal forma que  el estudiante se convierta en un interlocutor válido con sus pares, estableciendo posiciones críticas frente a resultados de investigaciones en su disciplina o en otras áreas del conocimiento. Se pretende contruibuir en que el estudiante se apropie de elementos que permitan analizar situaciones específicas con un enfoque estadístico adecuado.  
 
 El esfuerzo personal se desarrollará mediante la participación de los estudiantes en talleres regulares y la elaboración de trabajos escritos en el que se usará software especializado en manejo estadístico de datos.
 
@@ -19,7 +19,7 @@ El esfuerzo personal se desarrollará mediante la participación de los estudian
 
 # Foro
 
-Este sitio podrá ser utilizado para plantear preguntas, generar discusión y obtener mejores resultados con el proceso de aprendizaje. Al foro se puede acceder desde [aquí.](http://bioestadistica-1.43369.n8.nabble.com/)
+Este sitio podrá ser utilizado para plantear preguntas, generar discusión y obtener mejores resultados con el proceso de aprendizaje. Al foro se puede acceder desde [aquí.](http://bioestadistica-1-2018-02.78545.n8.nabble.com/)
 
 # Software R
 
