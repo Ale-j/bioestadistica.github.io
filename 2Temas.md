@@ -10,7 +10,7 @@ title: Temas
 - [Descargar](/Temas/Introductorios.zip)
 
 # Estadística Descriptiva 
-- [Estadísticos](/Temas/3_Estadisticos.html)
+- [Estadísticos](/Temas/3_Estadisticos.pdf)
 - [Tablas y gráficos](/Temas/4_TablasGraficos.html)
 - [Descriptiva con R](/Temas/5_DescriptivaR.html)
 - [Resultados encuesta](/Temas/Encuesta.zip)
