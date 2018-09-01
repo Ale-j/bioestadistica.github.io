@@ -7,7 +7,7 @@ title: Trabajos
 
 - Talleres en clase (30%)
 - Talleres y tareas grupales (30%)
-- Trabajo final escrito (40%)
+- Trabajo final (40%)
 
 # Políticas del curso
 
