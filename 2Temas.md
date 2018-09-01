@@ -7,14 +7,12 @@ title: Temas
 - [Conceptos básicos y áreas de estudio](/Temas/1_Introduccion.html)
 - [Población y muestra](/Temas/2_PoblacionMuestra.pdf)
 - [Introducción a R](/Temas/IntroR.pdf)
-- [Descargar](/Temas/Introductorios.zip)
 
 # Estadística Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.pdf)
 - [Tablas y gráficos](/Temas/4_TablasGraficos.html)
 - [Descriptiva con R](/Temas/5_DescriptivaR.html)
 - [Resultados encuesta](/Temas/Encuesta.zip)
-- [Descargar](/Temas/Descriptiva.zip)
 
 
 # Probabilidad
@@ -22,7 +20,6 @@ title: Temas
 - [Definición de probabilidad y álgebra de probabilidades](/Temas/7_Probabilidad.html)
 - [Variable aleatoria, funciones de probabilidad, esperanza matemática y varianza](/Temas/8_VariableAleatoria.html)
     - [Ejemplos y ejercicios (discretas y continuas)](/Temas/8.1_Ejercicios.pdf)
-- [Descargar](/Temas/Probabilidad.zip)
 
 # Distribuciones de probabilidad
 - [Distribuciones discretas I (Bernoulli, Binomial y Poisson)](/Temas/9_Discretas.html)
@@ -35,11 +32,9 @@ title: Temas
     - [Tabla F-Snedecor](/Temas/F.pdf)
     - [Tabla Chi Cuadrado](/Temas/Jicuadrado.pdf)
     - [Tabla t-Student](/Temas/t.pdf)
-- [Descargar](/Temas/Distribuciones.zip)
 
 # Inferencia estadística
 - [Estimación de parámetros: Para la media, varianza y proporciones](/Temas/12_Intervalos.html)
 - [Pruebas de hipótesis](/Temas/13_PruebasHipotesis.html)
 - [Ejemplos (I)](/Temas/13.1_Ejemplos1.html)
 - [Ejemplos (II)](/Temas/13.2_Ejemplos2.html)
-- [Descargar](/Temas/Inferencia.zip)
