@@ -18,6 +18,7 @@ title: Trabajos
 # Talleres en clase
 
 - [Actividad 1](/Talleres/Actividad_1.pdf)
+- [Actividad 2](/Talleres/Actividad_2.pdf)
 
 # Talleres y tareas grupales
 
