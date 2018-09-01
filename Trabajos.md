@@ -12,7 +12,7 @@ title: Trabajos
 # Políticas del curso
 
 - Toda entrega se realizará al correo **edavidja@unal.edu.co**.
-- El asunto de cada correo siempre deberá ser **[Bioestadística1]**.
+- El asunto de cada correo siempre deberá ser **[Bioestadistica1]**.
 - Los grupos de trabajo serán máximo de 2 personas.
 
 # Talleres en clase
