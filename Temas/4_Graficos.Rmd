@@ -1,0 +1,269 @@
+---
+title: "Estadística Descriptiva"
+subtitle: "Anális Descriptivo y Exploratorio con R"
+author: "Edimer David Jaramillo - Bioestadística 1"
+date: "Septiembre de 2018"
+output:
+  html_document:
+    theme: readable
+    css: style.css
+    highlight: pygments
+    df_print: paged
+    toc: yes
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      fig.align = "center")
+
+library(ggplot2)
+tema_gg <- theme_linedraw() +
+  theme(axis.title.x = element_text(size = 5),
+        axis.title.y = element_text(size = 5),
+        plot.title = element_text(size = 8))
+```
+
+# Resultados de encuesta
+
+## Base de datos
+
+```{r, echo=FALSE}
+encuesta <- read.csv("Encuesta.csv", dec = ",")
+encuesta
+```
+
+# ¿Cómo importar datos en R?
+
+  - `read.csv()`: función que permite leer datos en formato *csv* (*valores separados por comas*). **Nota:** en este formato está el resultado de la encuesta.
+  - **Explorar las siguientes funciones:**
+      - `read.csv2()`
+      - `read.table()`
+
+# Análisis descriptivo con R
+
+**Funciones de uso común:**
+
+  - `mean()`: función que permite obtener la media.
+  - `median()`: función que permite obtener la mediana.
+  - `mode()`: función que permite obtener la moda.
+  - `sd`: función que permite obtener la desviación estándar.
+  - `var()`: función que permite obtener la varianza.
+  - `min()`: función que permite obtener el valor mínimo.
+  - `max()`: función que permite obtener el valor máximo.
+  - `range()`: función que permite obtener el rango.
+  - `quantile()`: función que permite obtener cuartiles, deciles y percentiles.
+  - `IQR()`: función que permite obtener el rango intercuartílico.
+  - `table()`: función que permite obtener frecuencias absolutas.
+  - `prop.table()`: función que permite obtener frecuencias relativas.
+  - `summary()`: función que permite obtener un resumen numérico inicial de los datos. 
+
+**Tarea:**
+
+  - Instalar la biblioteca `moments`
+  - Explorar la función `skewness()`
+  - Explorar la función `kurtosis()`
+  - [Guía para instalación de bibliotecas en R.](https://www.youtube.com/watch?v=O23isArtZVQ)
+
+# Análisis gráfico con R  
+
+**Funciones de uso común:**
+
+  - **Gráficos para variables cuantitativas:**
+      - `hist()`: función que permite construir histogramas.
+      - `density()`: función que permite obtener densidades.
+      - `boxplot()`: función que permite construir diagramas de cajas y bigotes.
+      - `plot()`: función genérica que permite construir diagramas de dispersión (X vs Y).
+  - **Gráficos para variables cualitativas:**
+      - `barplot`: función que permite construir diagrama de barras.
+      - `pie()`: función que permite construir diagrama de sectores.      
+
+# Análisis de la encuesta
+
+## Lectura de datos
+
+```{r}
+encuesta <- read.csv("Encuesta.csv", dec = ",")
+head(encuesta)
+```
+
+## Resumen inicial
+
+```{r}
+summary(encuesta)
+```
+
+# Análisis del PAPA
+
+## Descriptivo
+
+**Media, varianza y desviación estándar:**
+
+```{r}
+mean(encuesta$PAPA)
+var(encuesta$PAPA)
+sd(encuesta$PAPA)
+```
+
+**Cuartiles:**
+
+```{r}
+quantile(encuesta$PAPA)
+```
+
+**Deciles:**
+
+```{r}
+quantile(encuesta$PAPA, probs = seq(0, 1, 0.10))
+```
+
+**Percentiles:**
+
+```{r}
+quantile(encuesta$PAPA, probs = seq(0, 1, 0.01))
+```
+
+## Gráficos
+
+**Distribución del PAPA:**
+
+```{r}
+hist(encuesta$PAPA)
+```
+
+**Histograma mejorado:**
+
+```{r}
+hist(encuesta$PAPA,
+     col = "dodgerblue4",
+     main = "Distribución del PAPA\n(Promedio Aritmético Ponderado Acumulado)",
+     ylab = "Frecuencia",
+     xlab = "Promedio Aritmético Ponderado Acumulado (PAPA)",
+     xlim = c(2.5, 5),
+     ylim = c(0, 12))
+grid()
+```
+
+[Colores en R.](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+
+**Histograma mejorado con densidad:**
+
+```{r}
+hist(encuesta$PAPA, 
+     col = "dodgerblue4",
+     las = 1,
+     main = "Distribución del PAPA\n(Promedio Aritmético Ponderado Acumulado)",
+     ylab = "Densidad",
+     xlab = "Promedio Aritmético Ponderado Acumulado (PAPA)",
+     xlim = c(2.5, 5),
+     ylim = c(0, 2),
+     freq = FALSE,
+     xaxt = "n")
+axis(1, at = seq(2.6, 4.8, 0.1))
+lines(density(encuesta$PAPA), 
+      col = "orangered",
+      lwd = 2)
+abline(v = mean(encuesta$PAPA), lwd = 2, lty = 2, col = "darkred")
+grid()
+```
+
+[Colores, líneas y símbolos en R.](https://www.statmethods.net/advgraphs/parameters.html)
+
+**Boxplot inicial:**
+
+```{r}
+boxplot(encuesta$PAPA)
+```
+
+**Boxplot mejordo:**
+
+```{r}
+boxplot(encuesta$PAPA,
+        main = "Boxplot del PAPA",
+        xlab = "",
+        ylab = "PAPA",
+        col = "forestgreen")
+abline(h = mean(encuesta$PAPA), col = "navy", lwd = 2, lty = 2)
+```
+
+**Boxplot comparativo (trabajo remunerado):**
+
+```{r}
+boxplot(encuesta$PAPA ~ encuesta$Trabajo,
+        main = "Boxplot del PAPA",
+        xlab = "Trabajo remunerado",
+        ylab = "PAPA",
+        col = "forestgreen")
+```
+
+**Boxplot comparativo (carrera profesional como primera opción):**
+
+```{r}
+boxplot(encuesta$PAPA ~ encuesta$Carrera,
+        main = "Boxplot del PAPA",
+        xlab = "Carrera profesional",
+        ylab = "PAPA",
+        col = "blue")
+```
+
+### Consulta 1
+
+**¿Es posible plantear que existe algún tipo de relación entre el PAPA y las horas que dedica a actividades académicas?**
+
+  - **Gráfico incial:**
+
+```{r}
+plot(x = encuesta$Horas_acad,
+     y = encuesta$PAPA)
+abline(lm(encuesta$PAPA ~ encuesta$Horas_acad))
+```
+
+  - **Gráfico mejorado:**
+
+```{r}
+plot(x = encuesta$Horas_acad,
+     y = encuesta$PAPA,
+     col = "red",
+     pch = 19,
+     xlab = "Horas de dedicación académica",
+     ylab = "PAPA",
+     main = "Relación de actividad académica vs PAPA")
+abline(lm(encuesta$PAPA ~ encuesta$Horas_acad), lwd = 2, col = "blue")
+```
+
+  - **Gráfico con biblioteca `ggplot2`:**
+
+```{r}
+# Debe tener instalada la biblioteca ggplot2
+library(ggplot2)
+
+ggplot(data = encuesta, aes(x = Horas_acad, y = PAPA)) +
+  geom_point()
+```
+
+  - **Gráfico mejorado con biblioteca `ggplot2`:**
+
+```{r}
+# Debe tener instalada la biblioteca ggplot2
+library(ggplot2)
+
+ggplot(data = encuesta, aes(x = Horas_acad, y = PAPA)) +
+  geom_point() +
+  geom_smooth(se = FALSE, color = "red") +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Horas de dedicación académica", y = "PAPA",
+       title = "Relación de actividad académica vs PAPA",
+       caption = "Línea azul: modelo lineal\nLínea roja: modelo no lineal")
+```
+
+# Tarea
+  
+  - Instalar las bibliotecas abordadas en clase.
+  - Responder con gráficos a las siguientes consultas:
+      - ¿Existe algún tipo de relación entre el PAPA y el número de redes sociales a las cuales está inscrito (a)?
+      - ¿Existe algún tipo de relación entre el PAPA y las horas que dedica dormir?  
