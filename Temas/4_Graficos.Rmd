@@ -83,7 +83,7 @@ encuesta
       - `barplot`: función que permite construir diagrama de barras.
       - `pie()`: función que permite construir diagrama de sectores.      
 
-# Análisis de la encuesta
+# Análisis de variable cuantitativa
 
 ## Lectura de datos
 
@@ -98,9 +98,9 @@ head(encuesta)
 summary(encuesta)
 ```
 
-# Análisis del PAPA
+## Análisis del PAPA
 
-## Descriptivo
+### Descriptivo
 
 **Media, varianza y desviación estándar:**
 
@@ -128,7 +128,7 @@ quantile(encuesta$PAPA, probs = seq(0, 1, 0.10))
 quantile(encuesta$PAPA, probs = seq(0, 1, 0.01))
 ```
 
-## Gráficos
+### Gráficos
 
 **Distribución del PAPA:**
 
