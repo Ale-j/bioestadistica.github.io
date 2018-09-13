@@ -10,7 +10,8 @@ title: Temas
 
 # Estadística Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.pdf)
-- [Gráficos](/Temas/4_Graficos.html)
+- [Gráficos I](/Temas/4_Graficos.html)
+- [Gráficos II](/Temas/5_Graficos2.html)
     - [Resultados encuesta](/Temas/Encuesta.csv)
 - [Descriptiva con R](/Temas/5_DescriptivaR.html)
 - [Resultados encuesta](/Temas/Encuesta.zip)
