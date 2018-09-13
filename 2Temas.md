@@ -10,13 +10,10 @@ title: Temas
 
 # Estadística Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.pdf)
-- **Gráficos:**
+- **Gráficos y Tablas:**
     - [Gráficos I](/Temas/4_Graficos.html)
     - [Gráficos II](/Temas/5_Graficos2.html)
     - [Resultados encuesta](/Temas/Encuesta.csv)
-- [Descriptiva con R](/Temas/5_DescriptivaR.html)
-- [Resultados encuesta](/Temas/Encuesta.zip)
-
 
 # Probabilidad
 - [Conjuntos, eventos y relaciones entre eventos, experimento aleatorio, espacio muestral](/Temas/6_IntroProbabilidad.html)
