@@ -22,4 +22,6 @@ title: Trabajos
 
 # Talleres y tareas grupales
 
+  - [Taller 1. Estadística Descriptiva](/Talleres/Taller1.html)
+  
 # Trabajo final

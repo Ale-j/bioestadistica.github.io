@@ -1,0 +1,108 @@
+---
+title: "Taller 1: Estadística Descriptiva"
+subtitle: "Primera parte: consultas"
+author: "Edimer David Jaramillo - Bioestadística 1"
+date: "Septiembre de 2018"
+output:
+  html_document:
+    theme: readable
+    css: estilo.css
+    highlight: tango
+    df_print: paged
+    toc: yes
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      fig.align = "center")
+
+library(ggplot2)
+tema_gg <- theme_linedraw() +
+  theme(axis.title.x = element_text(size = 5),
+        axis.title.y = element_text(size = 5),
+        plot.title = element_text(size = 8))
+```
+
+# Objetivos
+
+  - Generar conocimiento a partir de los datos aplicando técnicas de estadística descriptiva y exploratoria.
+  - Plantear un problema práctico en función de la información recopilada en bases de datos del sector agrario colombiano.
+  - Realizar consultas objetivas que contribuyan a la caracterización y entendimiento del problema planteado, teniendo como punto de partida los datos. 
+
+# Planteamiento
+
+  1. Escoja una de las 10 bases de datos (la que considere conveniente). La elección no debe ser aleatoria, la idea es que sea de su interés, por tanto, deberá tener un criterio bien argumentado.
+  2. Plantee un problema o situación de interés, cuya resolución esté acotada por los propios datos, es decir, que el alcance de lo planteado estará sujeto a la información registrada.
+  3. Formule 5 consultas a la base de datos. Entendiendo por consulta toda pregunta cuya resolución parcial subyace en los datos mediante gráficos, tablas o medidas de resumen. **Nota:** las consultas deben ser objetivas y bien estructuradas, de tal forma que en conjunto contribuyan al entendimiento del fenómeno analizado.
+
+# Bases de datos
+
+**Nota:** todas las bases de datos son de acceso libre desde la [página web de datos abiertos del gobierno Colombiano,](https://datos.gov.co/) sin embargo, al final del documento está un archivo *.zip* que contiene las 10 bases de datos con la finalidad de viabilizar el despliegue de las mismas.
+
+  - [Aptitud para el cultivo comercial del Cacao en Colombia (datos de julio de 2017).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Aptitud-para-el-cultivo-comercial-de-cacao-Julio-2/8tim-867q)
+  - [Exportaciones de algodón en Colombia (diciembre de 2016 a mayo de 2018).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Algod-n-Exportaciones/ttwt-pzeg)
+  - [Importaciones en avicultura en Colombia (datos de enero de 2006 a enero de 2017).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Avicultura-Importaciones/wr2b-5cpd)
+  - [Área, producción y rendimiento de caña panelera en Colombia (datos de 2007 a 2017).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Ca-a-Panelera-Area-Producci-n-Y-/n4hz-3mij)
+  - [Área, producción y rendimiento del Caucho (datos de 2007 a 2017).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Caucho-Area-Producci-n-Y-Rendimi/xfgv-2yxq)
+  - [Exportaciones de flores en Colombia (datos de 2006 a enero de 2018)](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Flores-Exportaciones/hieb-cqrb)
+  - [Área, producción y rendimiento de la papa en Colombia (datos de 2006 a 2017).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Papa-Area-Producci-n-Y-Rendimien/pnsj-t3kh)
+  - [Calidad del aire (inmisiones) y datos climatológicos durante el año 2016 en Colombia.](https://www.datos.gov.co/Ambiente-y-Desarrollo-Sostenible/INMISIONES-DATOS-DE-CONTAMINANTES-Y-CLIMATOL-GICOS/v3ny-6yj9)
+  - [Matriz cuantitativa anual del cultivo de hortalizas (año 2016, departamento de Sucre).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Matriz-cuantitativa-hortaliza-anual-en-el-dparamen/8bpu-848x)
+  - [Asistencia técnica del sector agropecuario (Palmira, Valle del Cauca. Año 2017).](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Registro-nico-de-Usuarios-de-Asistencia-T-cnica-RU/e5us-rswm)
+
+# Descargar
+
+  - [Click aquí para descargar.](/Talleres/Datos_T1/datos1.zip)
+
+# Anexo
+
+A continuación los códigos de cómo leer cada una de las bases de datos en R.
+
+```{r, collapse=TRUE, eval=FALSE}
+# Aptitud cultivo del cacao
+cacao <- read.csv("Aptitud_para_el_cultivo_comercial_de_cacao_-_Julio_2017.csv")
+
+# Exportaciones de algodón
+ex.algodon <- read.csv("Cadena_Productiva_Algod_n_-_Exportaciones.csv",
+                  encoding = "UTF-8")
+
+# Importaciones en avicultura
+avicultura <- read.csv("Cadena_Productiva_Avicultura_-_Importaciones.csv",
+                       encoding = "UTF-8")
+
+# Caña panelera
+cania <- read.csv("Cadena_Productiva_Ca_a_Panelera_-_Area__Producci_n_Y_Rendimiento.csv",
+                  encoding = "UTF-8")
+
+# Cultivo forestal: caucho
+caucho <- read.csv("Cadena_Productiva_Caucho_-_Area__Producci_n_Y_Rendimiento.csv",
+                   encoding = "UTF-8")
+
+# Exportaciones de flores
+flores <- read.csv("Cadena_Productiva_Flores_-_Exportaciones.csv",
+                   encoding = "UTF-8")
+
+# Cultivo de papa
+papa <- read.csv("Cadena_Productiva_Papa_-_Area__Producci_n_Y_Rendimiento.csv",
+                 encoding = "UTF-8")
+
+# Calidad del aire
+aire <- read.csv("INMISIONES_-_DATOS_DE_CONTAMINANTES_Y_CLIMATOL_GICOS_2016.csv",
+                 encoding = "UTF-8")
+
+# Hortalizas
+hortaliz <- read.csv("Matriz_cuantitativa_hortaliza__anual_en_el_dparamento_de_sucre_2016.csv",
+                   encoding = "UTF-8")
+
+# Asistencia técnica
+asistencia <- read.csv("Registro__nico_de_Usuarios_de_Asistencia_T_cnica__RUAT__2017_PALMIRA__Valle_del_Cauca.csv",
+                       encoding = "UTF-8")
+
+```
+

@@ -1,0 +1,50 @@
+---
+title: "Estadística Descriptiva"
+subtitle: "Anális Descriptivo y Exploratorio con R (2)"
+author: "Edimer David Jaramillo - Bioestadística 1"
+date: "Septiembre de 2018"
+output:
+  html_document:
+    theme: readable
+    css: style.css
+    highlight: pygments
+    df_print: paged
+    toc: yes
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      fig.align = "center")
+
+library(ggplot2)
+tema_gg <- theme_linedraw() +
+  theme(axis.title.x = element_text(size = 5),
+        axis.title.y = element_text(size = 5),
+        plot.title = element_text(size = 8))
+```
+
+# Resultados de encuesta
+
+## Base de datos
+
+```{r, echo=FALSE}
+encuesta <- read.csv("Encuesta.csv", dec = ",")
+encuesta
+```
+
+# Análisis de variable cualitativa
+
+## Diagrama de sectores
+
+**Gráfico inicial:**
+
+```{r}
+pie
+```
+

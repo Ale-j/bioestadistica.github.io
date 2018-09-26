@@ -12,6 +12,7 @@ title: Temas
 - [Estadísticos](/Temas/3_Estadisticos.pdf)
 - **Gráficos y Tablas:**
     - [Gráficos I](/Temas/4_Graficos.html)
+    - [Tablas](/Temas/6_Tablas.html)
     - [Gráficos II](/Temas/5_Graficos2.html)
     - [Resultados encuesta](/Temas/Encuesta.csv)
 
