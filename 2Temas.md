@@ -11,10 +11,10 @@ title: Temas
 # Estadística Descriptiva 
 - [Estadísticos](/Temas/3_Estadisticos.pdf)
 - **Gráficos y Tablas:**
-    - [Gráficos I](/Temas/04_Graficos.html)
-    - [Gráficos I](/Temas/4_Graficos.html)
+    - [Gráficos I](/Temas/04_Graficos.pdf)
+    - [Gráficos I - Encuesta](/Temas/4_Graficos.html)
+    - [Gráficos II](/Temas/5_Graficos2.html)    
     - [Tablas](/Temas/6_Tablas.html)
-    - [Gráficos II](/Temas/5_Graficos2.html)
     - [Resultados encuesta](/Temas/Encuesta.csv)
 
 # Probabilidad

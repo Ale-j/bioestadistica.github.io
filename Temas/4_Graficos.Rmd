@@ -2,7 +2,7 @@
 title: "Estadística Descriptiva"
 subtitle: "Anális Descriptivo y Exploratorio con R (1)"
 author: "Edimer David Jaramillo - Bioestadística 1"
-date: "Septiembre de 2018"
+date: "Enero de 2019"
 output:
   html_document:
     theme: readable
@@ -83,26 +83,80 @@ encuesta
       - `barplot`: función que permite construir diagrama de barras.
       - `pie()`: función que permite construir diagrama de sectores.      
 
-# Análisis de variable cuantitativa
-
-## Lectura de datos
+# Tipos de variable
 
 ```{r}
-encuesta <- read.csv("Encuesta.csv", dec = ",")
-head(encuesta)
+str(encuesta)
 ```
 
-## Resumen inicial
+# Variables cualitativas
+
+## Frecuencia absoluta y relativa
+
+**¿Cuántos estudiantes poseen trabajado remunerado al momento de responder la encuesta?**
+
+```{r, collapse=TRUE}
+table(encuesta$Trabajo) # f.absoluta
+```
+
+```{r, collapse=TRUE}
+prop.table(table(encuesta$Trabajo)) # f. relativa
+prop.table(table(encuesta$Trabajo))*100 # porcentual
+```
 
 ```{r}
-summary(encuesta)
+barplot(table(encuesta$Trabajo),
+        main = "F. Absoluta de trabajo remunerado",
+        xlab = "Respuesta", ylab = "Frecuencia", col = "blue")
 ```
 
-## Análisis del PAPA
+```{r}
+pie(table(encuesta$Trabajo),
+    main = "Diagrama de sectores para trabajo remunerado",
+    col = c("red", "blue"))
+```
 
-### Descriptivo
+**¿Cuál es el medio de transporte más utilizado por los estudiantes para dirigirse a la universidad?**
 
-**Media, varianza y desviación estándar:**
+```{r, collapse=TRUE}
+table(encuesta$Transporte)
+prop.table(table(encuesta$Transporte))
+```
+
+```{r}
+barplot(prop.table(table(encuesta$Transporte)),
+        main = "Medio de transporte de mayor uso",
+        xlab = "Transporte", ylab = "Frecuencia relativa", col = "blue")
+```
+
+**¿Cuál es el medio de transporte de mayor uso en estudiantes que poseen trabajo remunerado?**
+
+```{r, collapse=TRUE}
+table(encuesta$Trabajo, encuesta$Transporte)
+prop.table(table(encuesta$Trabajo, encuesta$Transporte))
+frecuencia <- table(encuesta$Trabajo, encuesta$Transporte)
+```
+
+```{r}
+barplot(frecuencia, beside = TRUE,
+        main = "Medio de transporte de mayor uso vs trabajo remunerado",
+        xlab = "Transporte", ylab = "F. Absoluta",
+        col = c("red", "blue"))
+legend(x = 3, y = 9, c("No","Sí"), fill = c("red", "blue"))
+```
+
+```{r}
+barplot(t(frecuencia), beside = TRUE,
+        main = "Medio de transporte de mayor uso vs trabajo remunerado",
+        xlab = "Trabajo remunerado", ylab = "F. Absoluta",
+        col = c("red", "blue", "green3", "magenta4"))
+legend(x = 1, y = 9, c("Bicicleta","Moto", "Otro", "Urbano"),
+       fill = c("red", "blue", "green3", "magenta4"))
+```
+
+# Variables cuantitativas
+
+**Media, varianza y desviación estándar del PAPA en estudiantes de Bioestadística 1:**
 
 ```{r}
 mean(encuesta$PAPA)
@@ -110,25 +164,44 @@ var(encuesta$PAPA)
 sd(encuesta$PAPA)
 ```
 
-**Cuartiles:**
+**Cuartiles del PAPA:**
 
 ```{r}
 quantile(encuesta$PAPA)
 ```
 
-**Deciles:**
+$$Q_{k}=\frac{k(n+1)}{4}$$
+
+$$Q_{3}=\frac{3(33+1)}{4} = 25.5$$
+
+```{r}
+# Cuartiles de forma manual
+n <- 33
+q3 <- (3*(33+1))/4
+q3
+
+# Datos ordenados
+papa.ordenado <- sort(encuesta$PAPA)
+papa.ordenado
+papa.ordenado[25]
+papa.ordenado[26]
+```
+
+**Deciles del PAPA:**
 
 ```{r}
 quantile(encuesta$PAPA, probs = seq(0, 1, 0.10))
 ```
 
-**Percentiles:**
+**Percentiles del PAPA:**
 
 ```{r}
 quantile(encuesta$PAPA, probs = seq(0, 1, 0.01))
 ```
 
-### Gráficos
+## Gráficos
+
+### Histogramas y densidades
 
 **Distribución del PAPA:**
 
@@ -148,8 +221,6 @@ hist(encuesta$PAPA,
      ylim = c(0, 12))
 grid()
 ```
-
-[Colores en R.](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
 
 **Histograma mejorado con densidad:**
 
@@ -172,14 +243,27 @@ abline(v = mean(encuesta$PAPA), lwd = 2, lty = 2, col = "darkred")
 grid()
 ```
 
-[Colores, líneas y símbolos en R.](https://www.statmethods.net/advgraphs/parameters.html)
+**Coeficiente de asimetría:**
+
+```{r}
+library(moments)
+skewness(encuesta$PAPA)
+```
+
+**Coeficiente de curtosis:**
+
+```{r}
+library(moments)
+kurtosis(encuesta$PAPA)
+```
+
+### Diagramas de cajas
 
 **Boxplot (Diagrama de cajas y bigotes):**
 
 ```{r, echo=FALSE, out.width="420", out.height="400"}
 knitr::include_graphics("images/boxplot.png")
 ```
-
 
 **Boxplot inicial:**
 
@@ -218,9 +302,9 @@ boxplot(encuesta$PAPA ~ encuesta$Carrera,
         col = "blue")
 ```
 
-### Consulta 1
+### Diagramas de dispersión
 
-**¿Es posible plantear que existe algún tipo de relación entre el PAPA y las horas que dedica a actividades académicas?**
+**¿Es posible plantear que existe algún tipo de relación entre el PAPA y las horas que dedica el estudiante a actividades académicas?**
 
   - **Gráfico incial:**
 
@@ -268,9 +352,15 @@ ggplot(data = encuesta, aes(x = Horas_acad, y = PAPA)) +
        caption = "Línea azul: modelo lineal\nLínea roja: modelo no lineal")
 ```
 
+### Resumen general
+
+```{r}
+summary(encuesta)
+```
+
 # Tarea
   
   - Instalar las bibliotecas abordadas en clase.
   - Responder con gráficos a las siguientes consultas:
       - ¿Existe algún tipo de relación entre el PAPA y el número de redes sociales a las cuales está inscrito (a)?
-      - ¿Existe algún tipo de relación entre el PAPA y las horas que dedica a dormir?  
+      - ¿Existe algún tipo de relación entre el PAPA y las horas que dedica a dormir? 

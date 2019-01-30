@@ -1,0 +1,140 @@
+---
+title: "Estadística Descriptiva"
+subtitle: "Gráficos"
+author: "Edimer David Jaramillo - Bioestadística 1"
+date: "Enero de 2019"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    colortheme: "whale"
+    slide_level: 2
+    fonttheme: "structurebold"
+    includes:
+      in_header: header.txt
+    fig_width: 3.9
+    fig_height: 2.7
+    highlight: kate
+    fig_caption: false
+    df_print: kable
+css: style.css       
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      fig.align = "center")
+
+library(ggplot2)
+tema_gg <- theme_linedraw() +
+  theme(axis.title.x = element_text(size = 5),
+        axis.title.y = element_text(size = 5),
+        plot.title = element_text(size = 8))
+```
+
+# Tipos de gráficos
+
+## Número de variables
+
+  - Univariados
+      - Diagramas de barras
+      - Diagramas de sectores
+      - Histogramas
+      - Densidades
+      - Diagramas de caja
+  - Bivariados
+      - Histogramas
+      - Densidades
+      - Diagramas de dispersión
+  - Multivariados
+  
+## Tipos de variables
+
+  - Variables cualitativas
+      - Diagramas de barras
+      - Diagramas de sectores
+  - Variables cuantitativas
+      - Histogramas
+      - Densidades
+      - Diagramas de caja
+      - Diagramas de dispersión
+
+# Gráficos con R
+      
+## Importar datos en R
+
+  - Funciones auxiliares:
+      - `read.csv()`: función que permite leer datos en formato *csv* (*valores separados por comas*).
+      - `read.csv2()`
+      - `read.table()`
+
+```{r}
+# Se importa en una variable llamada "encuesta"
+encuesta <- read.csv("Encuesta.csv", dec = ",")
+```
+
+## Variables cualitativas
+
+  - Frecuencias absolutas - `table()`.
+  - Frecuencias relativas - `prop.table()`.
+  - Diagrama de barras - `barplot()`.
+  - Diagrama de sectores - `pie()`.
+  
+**¿Cuantitativa o cualitativa?**
+
+  - Funciones auxiliares en R: `str()` y `class()`.
+
+##
+  
+```{r, collapse=TRUE}
+str(encuesta)
+```
+
+## 
+
+```{r}
+class(encuesta$Color)
+class(encuesta$PAPA)
+```
+
+  - **Cualitativas:**
+      - Character - `char`.
+      - Factor.
+  - **Cuantitativas:**
+      - Enteros - `int`.
+      - Reales - `num`.
+
+## Variables cuantitativas (1/3)
+
+  - `mean()`: función que permite obtener la media.
+  - `median()`: función que permite obtener la mediana.
+  - `mode()`: función que permite obtener la moda.
+  - `sd`: función que permite obtener la desviación estándar.
+  - `var()`: función que permite obtener la varianza.
+  - `min()`: función que permite obtener el valor mínimo.
+  - `max()`: función que permite obtener el valor máximo.
+  - `range()`: función que permite obtener el rango.
+
+## Variables cuantitativas (2/3)  
+
+  - `quantile()`: función que permite obtener cuartiles, deciles y percentiles.
+  - `IQR()`: función que permite obtener el rango intercuartílico.
+  - `summary()`: función que permite obtener un resumen numérico inicial de los datos. 
+  
+Con la biblioteca `moments`:
+
+  - Función `skewness()` para coeficiente de asimetría.
+  - Función `kurtosis()` para coeficiente de curtosis.  
+
+## Variables cuantitativas (3/3)
+
+  - Gráficos
+      - Histogramas - `hist()`.
+      - Densidades - `density()`.
+      - Diagrama de cajas - `boxplot()`.
+      - Diagrama de dispersión - `plot()`.
+      
+[Colores en R.](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+
+[Colores, líneas y símbolos en R.](https://www.statmethods.net/advgraphs/parameters.html)  
