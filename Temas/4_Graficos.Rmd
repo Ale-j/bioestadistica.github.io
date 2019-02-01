@@ -1,6 +1,6 @@
 ---
 title: "Estadística Descriptiva"
-subtitle: "Anális Descriptivo y Exploratorio con R (1)"
+subtitle: "Anális Descriptivo y Exploratorio con R"
 author: "Edimer David Jaramillo - Bioestadística 1"
 date: "Enero de 2019"
 output:
@@ -350,6 +350,33 @@ ggplot(data = encuesta, aes(x = Horas_acad, y = PAPA)) +
   labs(x = "Horas de dedicación académica", y = "PAPA",
        title = "Relación de actividad académica vs PAPA",
        caption = "Línea azul: modelo lineal\nLínea roja: modelo no lineal")
+```
+
+### Diagrama de barras en variable cuantitativa
+
+```{r}
+promedios <- tapply(X = encuesta$Casa_univer, INDEX = encuesta$Transporte,
+                    FUN = mean)
+promedios
+```
+
+```{r}
+# Gráfico de barras para representar promedios
+barplot(promedios,
+        main = "Tiempo de llegada a la universidad vs medio de transporte",
+        xlab = "Transporte", ylab = "Minutos",
+        ylim = c(0, 50),
+        col = c(2, 28, 5, 3))
+```
+
+```{r}
+# Gráfico de barras para representar promedios
+barras <- barplot(promedios,
+                  main = "Tiempo de llegada a la universidad vs medio de transporte",
+                  xlab = "Transporte", ylab = "Minutos",
+                  ylim = c(0, 55),
+                  col = c(2, 28, 5, 3))
+text(x = barras, y = promedios + 2, labels = round(promedios, digits = 1))
 ```
 
 ### Resumen general

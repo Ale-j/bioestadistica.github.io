@@ -2,7 +2,7 @@
 title: "Estadística Descriptiva"
 subtitle: "Tablas de frecuencia"
 author: "Edimer David Jaramillo - Bioestadística 1"
-date: "Septiembre de 2018"
+date: "Febrero de 2019"
 output:
   html_document:
     theme: readable
@@ -29,15 +29,112 @@ tema_gg <- theme_linedraw() +
         plot.title = element_text(size = 8))
 ```
 
-# Tablas de frecuencia 
-
- 
-
 # Resultados de encuesta
 
 ## Base de datos
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 encuesta <- read.csv("Encuesta.csv", dec = ",")
 encuesta
 ```
+
+# Tablas de frecuencia 
+
+  - Clases o intervalos.
+  - Frecuencia absoluta.
+  - Frecuencia absoluta acumulada.
+  - Frecuencia relativa.
+  - Frecuencia relativa acumulada.
+
+# Tabla de frecuencias univariada
+
+## Variable cualitativa
+
+```{r}
+# Tabla de frecuencias absolutas
+table(encuesta$Color)
+
+# Tabla de frecuencias relativas
+prop.table(table(encuesta$Color))
+
+# Tabla de frecuencias en términos porcentuales
+prop.table(table(encuesta$Color))*100
+```
+
+## Variable cuantitativa
+
+```{r}
+# Frecuencia absoluta por número de redes sociales
+table(encuesta$Redes)
+
+# Frecuencia relativa por número de redes sociales
+prop.table(table(encuesta$Redes))
+
+# Tabla de frecuencias en términos porcentuales
+prop.table(table(encuesta$Redes))
+```
+
+# Tabla de frecuencias bivariada
+
+```{r}
+# Trabajo y número de redes sociales: f. absoluta
+table(encuesta$Trabajo, encuesta$Redes)
+
+# Trabajo y número de redes sociales: f. relativa
+prop.table(table(encuesta$Trabajo, encuesta$Redes))
+
+# Trabajo y número de redes sociales: porcentaje
+prop.table(table(encuesta$Trabajo, encuesta$Redes))*100
+
+# Trabajo y número de redes sociales: proporción por filas
+prop.table(table(encuesta$Trabajo, encuesta$Redes), margin = 1)
+
+# Trabajo y número de redes sociales: proporción por columnas
+prop.table(table(encuesta$Trabajo, encuesta$Redes), margin = 2)
+```
+
+```{r}
+# Transporte y tiempo de llegada a la universidad
+table(encuesta$Transporte, encuesta$Casa_univer)
+
+# Transporte y tiempo de llegada a la universidad: proporción por filas
+prop.table(table(encuesta$Transporte, encuesta$Casa_univer), margin = 1)
+
+# Transporte y tiempo de llegada a la universidad: proporción por columnas
+prop.table(table(encuesta$Transporte, encuesta$Casa_univer), margin = 2)
+```
+
+# Tarea
+
+## Enunciado
+
+Consultar los siguientes métodos para obtener  clases o intervalos de una tabla de distribución de frecuencias:
+
+  - Fórmula de Sturges.
+  - Fórmula de Scott.
+  - Fórmula de Freedman-Diaconis.
+  
+## Distribución de frecuencias
+
+  - Instalar la biblioteca `fdth` y replicar los siguientes códigos.
+
+```{r}
+# Distribución de frecuencias en datos numéricos
+library(fdth)
+
+# Distribución simple sin clases o intervalos
+table(encuesta$PAPA)
+
+# Sturges
+sturges <- fdt(x = encuesta$PAPA, breaks = "Sturges")
+sturges
+
+# Scott
+scott <- fdt(x = encuesta$PAPA, breaks = "Scott")
+scott
+
+# Freedman-Diaconis
+FD <- fdt(x = encuesta$PAPA, breaks = "FD")
+FD
+```
+
