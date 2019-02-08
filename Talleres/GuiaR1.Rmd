@@ -1,0 +1,386 @@
+---
+title: "Taller 1: Estadística Descriptiva"
+subtitle: "Guía R"
+author: "Edimer David Jaramillo - Bioestadística 1"
+date: "Febrero de 2019"
+output:
+  html_document:
+    theme: readable
+    css: estilo.css
+    highlight: tango
+    df_print: paged
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      fig.align = "center")
+
+library(ggplot2)
+tema_gg <- theme_linedraw() +
+  theme(axis.title.x = element_text(size = 5),
+        axis.title.y = element_text(size = 5),
+        plot.title = element_text(size = 8))
+```
+
+**Nota:** la base de datos utilizada para esta guía está disponible en [este enlace.](https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Cadena-Productiva-Mango-Area-Producci-n-Y-Rendimie/yhdn-6m38)
+
+# Manejo de datos
+
+## ¿Cómo importar una base de datos?
+
+**Base de datos:** Cadena Productiva del Mango en Colombia - Área, Producción y Rendimiento (2007-2017).
+
+```{r}
+# mango: nombre de la variable donde están almacenados los datos.
+# file: archivo separado por comas (csv).
+# dec: tipo de decimal (punto o coma)
+mango <- read.csv(file = "Mango.csv", dec = ".")
+```
+
+## ¿Cómo identificar el tipo de variable?
+
+```{r}
+# str: estructura interna de la base de datos
+# Character (chr) y factor: variable cualitativa o categórica
+# Integer (int) y numeric (num): variable cuantitativa.
+str(mango)
+```
+
+```{r}
+# class: clase atómica de una variable
+class(mango$Producción.t.)
+```
+
+## ¿Cómo identificar el número de observaciones y variables?
+
+```{r}
+# dim: función que permite obtener las dimensiones de un arreglo.
+# 2081: filas u observaciones.
+# 16: columnas o variables.
+dim(mango)
+```
+
+- **Número de filas:**
+
+```{r}
+# nrow: función que proporciona el número de filas.
+nrow(mango)
+```
+
+- **Número de columnas:**
+
+```{r}
+# ncol: función que proporciona el número de columnas.
+ncol(mango)
+```
+
+## ¿Cómo obtener el nombre de las variables (columnas)?
+
+```{r}
+# names: función que proporciona el nombre de las variables
+names(mango)
+```
+
+## ¿Cómo editar el nombre de las variables (columnas)?
+
+```{r}
+# names: también puede ser implementada para editar los nombres de una base de datos.
+# c: concatenar o formar vector. En este caso se incorporan en el
+#vector tantos nombres como columnas haya en la base de datos.
+names(mango) <- c("cod.depto", "depto", "cod.mun", "mpio", "grupo", "subgrupo",
+                  "cultivo", "tipo", "cod.cult", "cientifico", "periodo",
+                  "area.semb", "area.cos", "prodn", "rto", "estado")
+```
+
+```{r}
+# De nuevo se observan los nombres.
+names(mango)
+```
+
+## ¿Cómo filtrar (eliminar o seleccionar) una o más columnas de una base de datos?
+
+- **Filtrar una columna:**
+
+```{r}
+# Operador "[]" para obtener subconjuntos.
+# [,]: antes de la coma se indican las filas (número de fila o condicional).
+# [,]: después de la coma se indican las columnas (nombre o número de columna)
+# Ejempleo [1, ]: filtra la fila 1 con todas las columnas
+# Ejempleo [, 1]: filtra la columna 1 con todas las filas
+# Ejempleo [, -1]: filtra todas las columnas excepto la 1, con todas las filas.
+# Ejempleo [c(1, 5, 10), c(1, 4, 5)]: filtra filas 1, 5 y 10 con las columnas
+# 1, 4 y 5.
+
+# mango2: nueva base de datos sin la columna número 1.
+# [, -1]: todas las columnas excepto la número 1 y todas las filas.
+mango2 <- mango[, -1]
+
+# dimensiones de mango2: "mango2" tiene 15 variables, una menos que "mango"
+dim(mango2)
+```
+
+```{r}
+# filtrar una columna por nombre
+mango2.1 <- mango[, "depto"]
+```
+
+- **Filtrar dos o más columnas:**
+
+```{r}
+# Filtrar las siguientes columnas:
+# Departamento - (Posición número 2).
+# Tipo: injerto o normal - (Posición número 8). 
+# Período: años - (Posición número 11).
+# Área sembrada - (Posición número 12).
+# Área cosechada - (Posición número 13).
+# Producción - (Posición número 14).
+# Rendimiento - (Posición número 15).
+
+# Filtro por nombre de variable en "mango3"
+mango3 <- mango[, c("depto", "tipo", "periodo", "area.semb", "area.cos",
+                    "prodn", "rto")]
+  
+# La nueva base de datos sólo tiene las variables indicadas en "mango3"
+# head: imprime en pantalla sólo las primeras 6 observaciones de una base de datos
+head(mango3)
+```
+
+```{r}
+# Filtro por posición de la variable
+mango4 <- mango[, c(2, 8, 11:15)]
+
+# "mango3" y "mango4" son exactamente iguales
+head(mango4)
+```
+
+## ¿Cómo filtrar una fila u observación de una base de datos?
+
+- **Filtrar de "mango4" o "mango3" áreas sembradas máximo de 1000 hectáreas:**
+
+```{r}
+# <: menor 
+# >: mayor 
+# <=: menor o igual
+# >=: mayor o igual
+# ==: igual
+# !=: diferente
+
+mango5 <- mango4[mango4$area.semb <= 1000, ]
+```
+
+- **Filtrar de "mango5" sólo información de Antioquia o Tolima:**
+
+```{r}
+# &: y
+# |: o
+mango6 <- mango5[mango5$depto == "ANTIOQUIA" | mango5$depto == "TOLIMA", ]
+head(mango6)
+
+# tail: muestra las últimas 6 observaciones de la base de datos
+tail(mango6)
+```
+
+- **Filtrar de "mango6" información del año 2017 y rendimientos mayores a 20 t/ha:**
+
+```{r}
+mango6.1 <- mango6[mango6$periodo == 2017 & mango6$rto > 20, ]
+mango6.1
+```
+
+### Filtro con `subset()`
+
+- **Filtrar filas del año 2017 y rendimiento mayores a 20 t/ha sin la variable departamento:**
+
+```{r}
+# subset: función que permite filtrar filas y columnas
+# x: base de datos
+# subset: filtro de filas
+# select: filtro de columnas
+mango6.2 <- subset(x = mango6, subset = periodo == 2017 & rto > 20,
+                   select = -depto)
+head(mango6.2)
+```
+
+## ¿Cómo obtener una sumatoria?
+
+- **Total de toneladas de mango producidas en los años 2007-2017:**
+
+```{r}
+# sum: función para sumatorias
+sum(mango6$prodn)
+```
+
+- **Total de toneladas de mango producidas por departamento entre 2007 y 2017:**
+
+```{r}
+# X: variable numérica
+# INDEX: variable categórica (factor)
+# FUN: función a ejecutar
+
+tapply(X = mango5$prodn, INDEX = mango5$depto, FUN = sum)
+```
+
+## ¿Cómo obtener una nueva variable con datos ya existentes?
+
+- **Recalculando el rendimiento (producción/área cosechada):**
+
+```{r}
+# Nueva variable "rto2" con el operador "$"
+mango5$rto2 <- mango5$prodn/mango5$area.cos
+head(mango5)
+```
+
+## ¿Cómo redondear un número?
+
+```{r}
+# round: función para redondear números
+# x: número o vector de números
+# digits: número de dígitos para redondear
+round(x = 2.1678,  digits = 2)
+```
+
+- **Redondeando "rto2" con un dígito:**
+
+```{r}
+mango5$rto2 <- round(x = mango5$rto2, digits = 1)
+head(mango5)
+```
+
+## ¿Cuáles son las categorías o niveles de una variable cualitativa (factor)?
+
+```{r}
+levels(mango5$depto)
+```
+
+# Gráficos
+
+## ¿Cómo agregar una línea (horizontal o vertical) a un gráfico?
+
+- **Distribución del rendimiento (t/ha) de mango:**
+
+```{r}
+# abline: función que permite añadir líneas a un gráfico
+# v: línea vertical
+# lwd: ancho de línea
+# col: color de línea
+# lty: tipo de línea (2 = punteada)
+# mean: función para obtener la media
+# mean(mango5$rto, na.rm = TRUE): na.rm = TRUE permite calcular la media aún cuando
+# existen valores ausentes (vacios o en blanco).
+
+hist(mango5$rto)
+abline(v = mean(mango5$rto, na.rm = TRUE), lwd = 1.3, col = "red", lty = 2)
+```
+
+- **Distribución del rendimiento (t/ha) por departamento:**
+
+```{r}
+# abline: función que permite añadir líneas a un gráfico
+# h: línea horizontal
+
+boxplot(mango5$rto ~ mango5$periodo)
+abline(h = mean(mango5$rto, na.rm = TRUE), lwd = 1.2, col = "blue2", lty = 2)
+```
+
+## ¿Cómo rotar las etiquetas del eje X?
+
+```{r}
+# Horizontal: las = 1
+# Vertical: las = 2
+
+boxplot(mango5$rto ~ mango5$depto, las = 2)
+```
+
+## ¿Cómo editar márgenes de un gráfico?
+
+```{r}
+# par: función para editar parámetros gráficos
+# mar: edición de márgenes del gráfico
+# mar = c(abajo, izquierda, arriba, derecha)
+# margen inferior: 11
+# margen izquierda: 3
+# margen superior: 0.7
+# margen derecha: 1
+
+boxplot(mango5$rto ~ mango5$depto, las = 2, par(mar = c(11, 3, 0.7, 1)))
+```
+
+## ¿Cómo construir un boxplot horizontal?
+
+```{r}
+# horizontal = TRUE: gráfico horizontal
+# horizontal = FALSE: gráfico vertical o normal
+
+boxplot(mango5$rto ~ mango5$periodo, horizontal = TRUE, las = 2,
+        ylab = "Año")
+```
+
+## ¿Cómo agregar puntos (medidas estadísticas) a un gráfico?
+
+-**Puntos representando el promedio de rendimiento en cada año:**
+
+```{r}
+# points: función para adicioanr puntos a un gráfico
+# tapply: función para operar por grupos (factores)
+# pch = tipo de punto
+# col: color del punto
+# cex: tamaño del punto
+# na.rm = TRUE: posibilita calcular la media en presencia de celdas vacías
+
+boxplot(mango5$rto ~ mango5$periodo, las = 2)
+points(tapply(X = mango5$rto, INDEX = mango5$periodo, FUN = mean,
+              na.rm = TRUE), pch = 19, col = "red", cex = 1)
+```
+
+## ¿Cómo agregar líneas (tendencia) a un gráfico?
+
+```{r}
+# lines: agregar línea a un gráfico
+# lwd = ancho de línea
+
+boxplot(mango5$rto ~ mango5$periodo, las = 2)
+points(tapply(X = mango5$rto, INDEX = mango5$periodo, FUN = mean,
+              na.rm = TRUE), pch = 19, col = "red", cex = 1)
+lines(tapply(X = mango5$rto, INDEX = mango5$periodo, FUN = mean,
+              na.rm = TRUE), col = "red", lwd = 1)
+```
+
+## ¿Cómo agregar etiquetas (leyenda) a un gráfico?
+
+- **Relación de área sembrada vs rendimiento:**
+
+```{r}
+# legend: permite incorporar etiquetas de guía a un gráfico
+# x = 650: ubicación de la leyenda en el eje x
+# y = 50: ubicación de la leyenda en el eje y
+# legend = c(...): nombres de etiquetas
+# fill: color de los puntos de la etiqueta
+# title: título de la leyenda
+
+plot(x = mango5$area.semb, y = mango5$rto, col = mango5$tipo)
+legend(x = 650, y = 50, legend = c("Mango Normal", "Mango Injerto"),
+       fill = c("black", "red"), title = "Tipo de mango")
+```
+
+## Diagramas de barras para representar promedio y desviación estándar
+
+- **Promedio y desviación del rendimiento por tipo de mango:**
+
+```{r}
+# medias: medias por tipo de mango
+# desvios: desviación estándar por tipo de mango
+# g1: gráfico de barras
+# arrows: permite añadir flechas a un gráfico
+
+medias <- tapply(mango5$rto, mango5$periodo, mean, na.rm = TRUE)
+desvios <- tapply(mango5$rto, mango5$periodo, sd, na.rm = TRUE)
+
+g1 <- barplot(medias, las = 2, ylim = c(0, 20))
+arrows(x0 = g1, y0 = medias + desvios, y1 = medias - desvios, angle = 90, code = 3,
+       length = 0.05)
+```
+
