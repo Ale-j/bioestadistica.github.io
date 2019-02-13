@@ -26,3 +26,5 @@ title: Trabajos
     - [Guía R - Taller 1](/Talleres/GuiaR1.html)
   
 # Trabajo final
+
+-  [Primera parte.](/Talleres/TrabajoFinal1.pdf)
