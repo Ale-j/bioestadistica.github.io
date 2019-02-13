@@ -18,7 +18,7 @@ title: Temas
 
 # Probabilidad
 - [Conjuntos, eventos y relaciones entre eventos, experimento aleatorio, espacio muestral](/Temas/7_IntroProbabilidad.pdf)
-- [Definición de probabilidad y álgebra de probabilidades](/Temas/8_Probabilidad.html)
+- [Definición de probabilidad](/Temas/8_Probabilidad.pdf)
 - [Variable aleatoria, funciones de probabilidad, esperanza matemática y varianza](/Temas/8_VariableAleatoria.html)
     - [Ejemplos y ejercicios (discretas y continuas)](/Temas/8.1_Ejercicios.pdf)
 
