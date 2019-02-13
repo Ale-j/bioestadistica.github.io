@@ -33,6 +33,14 @@ tema_gg <- theme_linedraw() +
         plot.title = element_text(size = 8))
 ```
 
+# Método Científico
+
+##
+
+```{r, out.width = "210px", out.height="125px"}
+knitr::include_graphics("images/metodociencia.png")
+```
+
 # Teoría de conjuntos
 
 ## Definición de conjunto
