@@ -28,5 +28,5 @@ title: Trabajos
 # Trabajo final
 
 - [Primera parte.](/Talleres/TrabajoFinal1.pdf)
-- [Segunda parte](/Talleres/TrabajoFinal1.2.pdf)
+- [Segunda parte.](/Talleres/TrabajoFinal1.2.pdf)
     - [Guía de uso Science Journal](/Talleres/ScienceJournal.html)
