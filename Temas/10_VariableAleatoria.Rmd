@@ -1,0 +1,251 @@
+---
+title: "Variable Aleatoria"
+subtitle: "Distribución de una variable aleatoria"
+author: "Edimer David Jaramillo - Bioestadística 1"
+date: "Febrero de 2019"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    colortheme: "whale"
+    slide_level: 2
+    fonttheme: "structurebold"
+    includes:
+      in_header: header.txt
+    fig_width: 2.8
+    fig_height: 2
+    highlight: kate
+    fig_caption: false
+    df_print: kable
+css: style.css       
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      fig.align = "center",
+                      out.width = "290px", out.height="130px")
+
+library(ggplot2)
+tema_gg <- theme_linedraw() +
+  theme(axis.title.x = element_text(size = 5),
+        axis.title.y = element_text(size = 5),
+        plot.title = element_text(size = 8))
+```
+
+# Variable Aleatoria
+
+## Variable aleatoria (1/2)
+
+  - Un evento $A$ al cual atribuimos una probabilidad será llamado **evento aleatorio**.
+  - Una variable aleatoria (v.a.) es una función que asocia a cada elemento del espacio muestral $\Omega$ ($S$) un número real. Se denota usualmente con letras mayúsculas (X, Y, Z).
+
+```{r,  out.width = "200px", out.height="90px"}
+knitr::include_graphics("images/experimento.png")
+```
+
+## Variable aleatoria (2/2)
+
+```{r}
+knitr::include_graphics("images/variablea.png")
+```
+
+## Tipos de variables aleatorias
+
+Las variables aleatorias pueden ser de dos tipos:
+
+  - **Discretas:** aquellas que sólo pueden tomar valores en un conjunto finito numerable.
+  - **Continuas:** aquellas que toman valores en uno o varios intervalos de la recta de los reales, en cuyo caso, el conjunto es no numerable.
+  
+## Distribución de una variable aleatoria
+
+  - Una v.a se define como un descriptor de eventos o sucesos aleatorios y su **función** de distribución asigna probabilidades a esos eventos.
+  - Variable aleatoria discreta:
+      - Función masa de probabilidad (f.m.p.)
+      - Función de distribución acumulada (f.d.a.)
+  - Variable aleatoria continua:
+      - Función de densidad.
+      - Función de distribución acumulada
+
+# Distribución de una variable aleatoria discreta
+
+## Variable aleatoria discreta
+
+```{r, out.width = "230px", out.height="150px"}
+knitr::include_graphics("images/categorical-bar-plot.png")
+```
+      
+## Función masa de probabilidad (f.m.a.)
+
+La función masa de probabilidad (f.m.p) de una variable aleatoria discreta es un gráfico, tabla o fórmula que específica la probabilidad asociada a cada resultado del espacio muestral. $$f(x)=P(X=x)$$
+
+```{r, out.width = "150px", out.height="80px"}
+knitr::include_graphics("images/discretav.png")
+```
+
+Para la f.m.p se satisfacen las siguientes condiciones o propiedades:
+
+  - $f(x_i) \geq 0$
+  - $\sum\nolimits_{i=1}^xf(x_i) = 1$
+  - $f(x_i) = P(X=x_i)$
+
+## Función de distribución acumulada (f.d.a.)
+
+Describe un evento particular, donde se asocia una probabilidad a los puntos muestrales de la variable aleatoria con un valor menor o igual que $x$. $$f(x)=P(X \leq x) = \sum P(x_i);  \ \forall\ x \in R $$
+
+Para la f.d.a se satisfacen las siguientes condiciones:
+
+  - $f(a)=P(X \leq a) = \sum\nolimits_{x=-\infty}^a P(x)$
+  - $f(-\infty)=0$
+  - $f(\infty)=1$
+
+## Función de distribución acumulada (f.d.a.)
+
+```{r, out.width = "150px", out.height="100px"}
+knitr::include_graphics("images/acumulada.png")
+```
+
+Basado en el gráfico de la función de distribución acumulada, obtener las siguientes probabilidades:
+
+  - $P(X=200)$ **Rta: 0.2**
+  - $P(X \leq 200)$ **Rta: 0.5**
+  - $P(X \geq 350)$ **Rta: 0.5**
+
+# Distribución de una variable aleatoria continua
+
+## Variable aleatoria continua
+
+```{r, out.width = "210px", out.height="130px"}
+knitr::include_graphics("images/aleatoriaco.png")
+```
+
+## Función de densidad (1/3)
+
+La función de densidad de probablidad $f(x)$ describe la distribución de probabilidad de una variable aleatoria continua.
+
+```{r}
+knitr::include_graphics("images/continua.png")
+```
+
+## Función de densidad (2/3)
+
+La probabilidad está determinada por el área bajo la curva desde un punto $a$ hasta el punto $b$. $$P(a < X < b) =\ área\ bajo\ la\ curva$$
+
+```{r, out.height="140px"}
+knitr::include_graphics("images/curva.png")
+```
+
+## Función de densidad (3/3)
+
+$$P(a < X < b) = \int_{a}^{b} f(x)dx;  \ \forall\ a,b \in R $$
+
+La función de densidad de una v.a. continua satisface las siguientes propiedaes:
+
+  - $f(x)>0$
+  - $\int_{-\infty}^{\infty} f(x) = 1$
+
+## Función de distribución acumulada (f.d.a.)
+
+De la definición de función de densidad de una variable aleatoria continua, se deduce que la función de distribución acumulada de esta variable puede ser obtenida a través de la siguiente expresión: $$P(X \leq x) = \int_{-\infty}^{x} f(x)dx$$
+
+# Medidas de resumen de una variable aleatoria
+
+## Medidas resumen (1/4)
+
+  1. A cada variable aleatoria se asocia una función de distribución.
+  2. El análisis del comportamiento de una variable se puede realizar mediante la descripción de su distribución, utilizando ciertos valores o parámetros que la caracterizan.
+  3. Si un experimento aleatorio es realizado y una variable aleatoria es definida, se puede determinar el **valor esperado** y la **varianza** de dicha variable aleatoria.
+
+## Medidas resumen (2/4)
+
+  - **Diferencias en localización ($\mu$):** 
+  
+```{r, out.width = "210px", out.height="100px"}
+knitr::include_graphics("images/distribucion1.png")
+```
+
+## Medidas resumen (3/4)
+
+  - **Diferencias en variación ($\sigma^2$):** 
+
+```{r, out.width = "210px", out.height="100px"}
+knitr::include_graphics("images/distribucion2.png")
+```
+
+## Medidas resumen (4/4)
+
+  - **Igual localización ($\mu$) y diferente variación ($\sigma^2$):** 
+
+```{r}
+knitr::include_graphics("images/distribucion3.png")
+```
+
+## Esperanza matemática - $E(X)$
+
+La esperanza matemática de una variable aleatoria se puede definir desde un punto de vista intuitivo, como el promedio de los valores asumidos por la variable, donde cada valor es "ponderado" por su probabilidad de ocurrencia.
+
+  - **Esperanza matemática de una variable aleatoria discreta:** $$E(X) = \mu = \sum\nolimits_{i=1}^n x_if(x_i)$$
+  - **Esperanza matemática de una variable aleatoria continua:** $$E(X) = \mu = \int_{-\infty}^{\infty} xf(x)dx$$
+
+**Nota:** esta integral no siempre existe, en cuyo caso, se dirá que la variable aleatoria no tiene esperanza matemática.
+
+## Varianza - $Var(X)$
+
+La esperanza matemática de una varible aleatoria sólo proporciona información parcial acerca de su distribución, indicando dónde está posicionada, sin embargo, dos o más distribuciones pueden tener la misma medida de posición y aún así, ser diferentes. Por ello surge la necesidad de una medida que indique similitud entre los valores de la variable aleatoria.
+
+  - **Varianza de una variable aleatoria discreta:** $$Var(X) = \sigma^2 = \sum\nolimits_{x_i}^n (x_i - \mu)^2 f(x_i)$$
+  - **Varianza de una variable aleatoria continua:** $$Var(X) = E[(x - \mu)^2] = \sigma^2 = \int_{-\infty}^{\infty} (x - \mu)^2 f(x) dx $$
+
+# Ejercicios
+
+## Ejercicio 1
+
+Suponga que la $f(x)$ representa una función de probabilidad dada por: $$f(x)=\frac{2x+1}{25}, x = 0, 1, 2, 3, 4$$
+
+Hallar las siguientes probabilidades:
+
+  - $P(X = 4)$
+  - $P(X \leq 1)$
+  - $P(2 \leq X < 4)$
+  - $P(X > -10)$
+
+## Ejercicio 2
+  
+Considere la siguiente función de distribución acumulada para la variable aleatoria $X$:
+
+```{r, out.height="100px", out.width="210px"}
+knitr::include_graphics("images/ejercicio3.png")
+```
+
+Obtener las siguientes probabilidades:
+
+  - $P(X \leq 1)$
+  - $P(X < 1)$
+  - $P(X = 1)$
+  - $P(X \leq 0)$ 
+  
+## Ejercicio 3
+
+Una ambulancia de voluntarios realiza de 0 a 5 servicios por día. A continuación se presenta la distribución de probabilidad de los servicios por día.
+
+```{r, out.height="40px", out.width="170px"}
+knitr::include_graphics("images/ejercicio4.png")
+```
+
+Obtener:
+
+  - El valor esperado o esperanza matemática $E(X)$ del número de servicios
+  - La varianza $Var(X)$ del número de servicios
+  - La desviación estándar del número de servicios
+
+## Ejercicio 4
+  
+En un juego de azar una persona saca una sola carta de una baraja ordinaria de 52 cartas. A una persona le pagan 15 pesos por sacar una “sota” o una reina y 5 pesos por sacar un rey o un as. Alguien que saque cualquier otra carta paga 4 pesos. Si una persona participa en este juego:
+
+  - ¿Cuál es la ganancia esperada?
+  - ¿Cómo se interpreta este valor?
+
+## Ejercicio 5
+  
+Se venden 5000 billetes para una rifa a 1 euro cada uno. Si el único premio del sorteo es de 1800 euros, calcular el resultado que debe esperar una persona que compra 3 billetes.
