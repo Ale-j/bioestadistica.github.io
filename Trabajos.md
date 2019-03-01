@@ -31,4 +31,4 @@ title: Trabajos
 - [Segunda parte.](/Talleres/TrabajoFinal1.2.pdf)
     - [Guía 1: uso de Science Journal](/Talleres/ScienceJournal.html)
 - [Tercera parte.](/Talleres/TrabajoFinal1.3.pdf)
-    - [Guía 2: estructuración de bases de datos con mediciones de Science Journal.](Guia2.html)
+    - [Guía 2: estructuración de bases de datos con mediciones de Science Journal.](/Talleres/Guia2.html)
