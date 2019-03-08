@@ -23,8 +23,8 @@ title: Temas
 - [Variable aleatoria, funciones de probabilidad, esperanza matemática y varianza](/Temas/10_VariableAleatoria.pdf)
 
 # Distribuciones de probabilidad
-- [Distribuciones de probabilidad discretas](/Temas/11_Discretas.html)
-- [Distribuciones de probabilidad continuas](/Temas/12_Continuas.html)
+- [Distribuciones de probabilidad discretas](/Temas/11_Discretas.pdf)
+- [Distribuciones de probabilidad continuas](/Temas/12_Continuas.pdf)
 - Tablas de distribuciones
     - [Tabla Z](/Temas/Z.pdf)
     - [Tabla F-Snedecor](/Temas/F.pdf)
