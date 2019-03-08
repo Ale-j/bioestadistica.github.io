@@ -23,11 +23,8 @@ title: Temas
 - [Variable aleatoria, funciones de probabilidad, esperanza matemática y varianza](/Temas/10_VariableAleatoria.pdf)
 
 # Distribuciones de probabilidad
-- [Distribuciones discretas I (Bernoulli, Binomial y Poisson)](/Temas/9_Discretas.html)
-- [Distribuciones discretas II (Geométrica, Hipergeométrica y B. Negativa)](/Temas/9.1_Discretas.html)
-    - [Ejercicios](/Temas/9.2_Ejercicios.pdf)
-- [Distribuciones continuas](/Temas/10_Continuas.html)
-- [Distribuciones derivadas del muestreo](/Temas/11_Muestreo.html)
+- [Distribuciones de probabilidad discretas](/Temas/11_Discretas.html)
+- [Distribuciones de probabilidad continuas](/Temas/12_Continuas.html)
 - Tablas de distribuciones
     - [Tabla Z](/Temas/Z.pdf)
     - [Tabla F-Snedecor](/Temas/F.pdf)
