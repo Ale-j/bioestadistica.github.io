@@ -379,13 +379,13 @@ $E[X]$:
 (media_bn <- 2/0.5)
 ```
 
-## Distribución Hipergeométrica (1/)
+## Distribución Hipergeométrica (1/6)
 
   - Esta distribución está sujeta a condiciones de **muestreo sin reemplazo** en las que cada elemento es diferente y será elegido hasta completar la muestra, sin restituir los elementos extraídos.
   - El tamaño de la población del cual proviene la muestra es conocido.
   - Permite responder a la probabilidad de obtener $k$ éxitos en una muestra con $n$ elementos, proveniente de una población de tamaño $N$.
 
-## Distribución Hipergeométrica (2/)
+## Distribución Hipergeométrica (2/6)
 
 Una variable aleatoria $X$ tiene distribución Hipergeométrica si su función de densidad es: $$f(x) = \frac{\binom{k}{x} \binom{N-k}{n-x}}{\binom{N}{n}};\ x = 0, 1, ..., k$$  
 
@@ -399,7 +399,7 @@ donde:
 Notación:
 $$X \sim h(n, k, N)$$
 
-## Distribución Hipergeométrica (3/)
+## Distribución Hipergeométrica (3/6)
 
 **Esperanza ($E[X]$) y varianza ($Var[X]$):**
 
@@ -411,14 +411,14 @@ Donde:
   - $p = \frac{k}{N}$
   - $\frac{N-n}{N-1}$: es el factor de corrección para poblaciones finitas
 
-## Distribución Hipergeométrica (4/)
+## Distribución Hipergeométrica (4/6)
 
 **Ejemplo:** Un lote de bovinos contiene 100 animales alimentados con la dieta A y 200 animales alimentados con la dieta B. Si se escogen 4 animales al azar, sin reemplazo. Obtener:
 
   1. La probabilidad de que todos los bovinos sean alimentados con la dieta A.
   2. La probabilidad de que dos o más bovinos sean alimentados con la dieta A.
 
-## Distribución Hipergeométrica (5/)
+## Distribución Hipergeométrica (5/6)
 
 **Solución manual:**
 
@@ -430,7 +430,7 @@ Donde:
 
 2. $P(X \geq 2) = \frac{\binom{100}{2} \binom{300-100}{2}}{\binom{300}{4}} + \frac{\binom{100}{3} \binom{300-100}{3}}{\binom{300}{4}} + \frac{\binom{100}{4} \binom{300-100}{0}}{\binom{300}{4}} = 0.408$
 
-## Distribución Hipergeométrica (6/)
+## Distribución Hipergeométrica (6/6)
 
   - `rhyper()`: generar números bajo la distribución Hipergeométrica
   - `dhyper()`: función masa de probabilidad
