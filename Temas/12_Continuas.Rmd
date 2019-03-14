@@ -284,11 +284,11 @@ legend('toprigh',lty=1,col=1:4,lwd=2,cex=0.9,
 
   - Llamada la distribución F de Fisher o F de Snedecor.
   - Generalmente es la distribución nula de una prueba estadística (análisis de varianza)
-  - Notación: $X \sim F_(K_1,\ K_2)$
+  - Notación: $X \sim F_(k_1,\ k_2)$
   - Útil en comparación de varianzas
   - [Tabla F](https://bioestadistica.github.io/Temas/F.pdf)
 
-La distribución F surge como resultado de la siguiente operación entre variables aleatorias: $$F = \frac{Y_1/d_1}{Y_2/d_2}$$
+La distribución F surge como resultado de la siguiente operación entre variables aleatorias: $$F = \frac{Y_1/k_1}{Y_2/k_2}$$
 
 Donde:
 
