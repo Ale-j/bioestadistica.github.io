@@ -284,7 +284,7 @@ legend('toprigh',lty=1,col=1:4,lwd=2,cex=0.9,
 
   - Llamada la distribución F de Fisher o F de Snedecor.
   - Generalmente es la distribución nula de una prueba estadística (análisis de varianza)
-  - Notación: $X \sim \chi^2_(d_1,\ d_2)$
+  - Notación: $X \sim F_(K_1,\ K_2)$
   - Útil en comparación de varianzas
   - [Tabla F](https://bioestadistica.github.io/Temas/F.pdf)
 
