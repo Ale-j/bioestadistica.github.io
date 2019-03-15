@@ -32,7 +32,7 @@ title: Temas
     - [Tabla t-Student](/Temas/t.pdf)
 
 # Inferencia estadística
-- [Estimación de parámetros: Para la media, varianza y proporciones](/Temas/12_Intervalos.html)
-- [Pruebas de hipótesis](/Temas/13_PruebasHipotesis.html)
-- [Ejemplos (I)](/Temas/13.1_Ejemplos1.html)
-- [Ejemplos (II)](/Temas/13.2_Ejemplos2.html)
+- [Distribución de estadísticos muestrales](/Temas/13_Inferencia_Mu.pdf)
+- [Introducción](/Temas/14_Inferencia.pdf)
+- Inferencia sobre una población:
+    - [Infrencia sobre $\mu$](/Temas/15_UnaPob.pdf)

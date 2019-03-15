@@ -256,6 +256,15 @@ Notación: $$X \sim \chi^2(k)$$
   - $E[X] = k$
   - $Var[X] = 2k$
 
+# Distribución de estadísticos muestrales
+
+## Muestreo
+
+  - El muestreo tiene como objetivo inferir propiedades de una población a partir de una fracción de ella, conocida como muestra.
+  - Desde el punto de vista estadístico el objetivo es conocer los parámetros de la distribución de la variable de interés.
+  - Los estadísticos muestrales sirven como aproximación (estimación) de los parámetros que caracterizan la distribución.
+  - Los estadísticos son desconocidos, por tanto, se consideran variables aleatorias y como tales, tienen una distribución asociada.
+
 # Distribuciones derivadas del muestreo
 
 ## Distribución *t* de Student (1/2)
