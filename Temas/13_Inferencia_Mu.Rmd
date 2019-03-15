@@ -33,7 +33,7 @@ tema_gg <- theme_linedraw() +
         plot.title = element_text(size = 8))
 ```
 
-# Distribución de $\mu$
+# Distribución de $\bar{X}$
 
 ## Distribución de la media muestral (1/4)
 
