@@ -1,6 +1,6 @@
 ---
 title: "Distribuciones de probabilidad"
-subtitle: "Distribución de la media muestral"
+subtitle: "Distribución de estadísticos muestrales"
 author: "Edimer David Jaramillo - Bioestadística 1"
 date: "Marzo de 2019"
 output: 
@@ -32,6 +32,8 @@ tema_gg <- theme_linedraw() +
         axis.title.y = element_text(size = 5),
         plot.title = element_text(size = 8))
 ```
+
+# Distribución de $\mu$
 
 ## Distribución de la media muestral (1/4)
 
