@@ -30,9 +30,9 @@ title: Temas
     - [Tabla F-Snedecor](/Temas/F.pdf)
     - [Tabla Chi Cuadrado](/Temas/Jicuadrado.pdf)
     - [Tabla t-Student](/Temas/t.pdf)
+- [Distribución de estadísticos muestrales](/Temas/13_Inferencia_Mu.pdf)
 
 # Inferencia estadística
-- [Distribución de estadísticos muestrales](/Temas/13_Inferencia_Mu.pdf)
 - [Introducción](/Temas/14_Inferencia.pdf)
 - Inferencia sobre una población:
     - [Infrencia sobre la media](/Temas/15_UnaPob.pdf)
