@@ -35,4 +35,4 @@ title: Temas
 - [Distribución de estadísticos muestrales](/Temas/13_Inferencia_Mu.pdf)
 - [Introducción](/Temas/14_Inferencia.pdf)
 - Inferencia sobre una población:
-    - [Infrencia sobre $\mu$](/Temas/15_UnaPob.pdf)
+    - [Infrencia sobre la media](/Temas/15_UnaPob.pdf)
