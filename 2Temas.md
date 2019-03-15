@@ -35,4 +35,4 @@ title: Temas
 # Inferencia estadística
 - [Introducción](/Temas/14_Inferencia.pdf)
 - Inferencia sobre una población:
-    - [Infrencia sobre la media](/Temas/15_UnaPob.pdf)
+    - [Inferencia sobre la media](/Temas/15_UnaPob.pdf)
