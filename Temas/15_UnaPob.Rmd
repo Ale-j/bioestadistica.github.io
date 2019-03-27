@@ -88,4 +88,10 @@ knitr::include_graphics("images/media2.png")
   - Calcular el valor P en una distribución $t-student$ con $n-1$ grados de libertad
   - Comparar el valor P con $\alpha$ y concluir.
   
-  
+# Ejercicio
+
+## Ejercicio con PAPA UNAL - Medellín
+
+- **Contexto:** la oficina de planeación de la Universidad Nacional de Colombia - sede Medellín, proporciona datos ([***consultar aquí***](http://gesinapp.medellin.unal.edu.co:8080/pentaho/api/repos/%3Apublic%3ARendimiento%3Arep_estudiantexpapa.prpt/viewer?userid=publico&password=publico)) en donde sugiere que para el semestre de 2017-2 la gran mayoría de estudiantes (cerca del 17%) presentaban el PAPA entre 3.5 y 3.6. Esta información es coincidente con la reportada en [***esta página web.***](https://tambinsoyunal.fandom.com/es/wiki/PAPA)
+
+- **Problema:** con los resultados obtenidos para el PAPA a través de la encuesta en el grupo 3 de Bioestadística 1, verifique si el promedio del salón de clase es igual a 3.5, construya y valide un juego de hipótesis, además, proporcione un intervalo del 95% de confianza para el verdadero valor del PAPA. Interprete los resultados de forma articulada.

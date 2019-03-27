@@ -1,0 +1,256 @@
+---
+title: "Ejemplo de inferencia sobre la media"
+subtitle: "Bioestadística 1"
+author: "Edimer David Jaramillo"
+date: "20 de marzo de 2019"
+output:
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Datos de pesos de arroz
+
+```{r}
+# Ingresando datos
+peso <- c(486, 503, 504,  505, 506, 506, 503, 505, 507, 508)
+marca <- c("Otra", "Caribe", "Caribe", "Otra", "Caribe", "Orquidea", "Orquidea",
+           "Orquidea", "Otra", "Otra")
+
+# Base de datos
+datos <- data.frame(Peso = peso,
+                    Marca = marca)
+```
+
+## Base de datos
+
+  - **n:**  10 datos
+  - **Variables:**
+      - Peso en gramos
+      - Marca de arroz
+  - **Filas:** cada fila representa un individuo (libra de arroz).
+  
+```{r}
+datos
+```
+
+
+# Exploración de datos
+
+## Estadísticos descriptivos general
+
+  - **Media:** 
+  
+  
+```{r}
+mean(datos$Peso)
+```
+
+  
+  - **Desviación estándar:**
+  
+```{r}
+sd(datos$Peso)
+```
+
+  - **Mediana:**
+  
+```{r}
+median(datos$Peso)
+```
+
+  - **Mínimo:**
+  
+```{r}
+min(datos$Peso)
+```
+
+  - **Máximo:**
+
+
+```{r}
+max(datos$Peso)
+```
+
+
+## Estadísticos descriptivos por marca
+
+### Promedio de peso por marca
+
+
+```{r}
+tapply(X = datos$Peso, INDEX = datos$Marca, FUN = mean)
+```
+
+
+### Desviación  de peso por marca
+
+
+```{r}
+tapply(X = datos$Peso, INDEX = datos$Marca, FUN = sd)
+```
+
+
+### Mediana  de peso por marca
+
+
+```{r}
+tapply(X = datos$Peso, INDEX = datos$Marca, FUN = median)
+```
+
+## Histograma
+
+```{r}
+hist(datos$Peso, xlim = c(485,520))
+abline(v = mean(datos$Peso), col= "red", lwd= 2)
+abline(v = mean(datos$Peso)+sd(datos$Peso), col= "blue",lwd= 2)
+abline(v = mean(datos$Peso)-sd(datos$Peso), col= "blue",lwd= 2)
+abline(v = mean(datos$Peso)+(2*sd(datos$Peso)), col= "green",lwd= 2)
+abline(v = mean(datos$Peso)-(2*sd(datos$Peso)), col= "green",lwd= 2)
+```
+
+
+
+# Probabilidad 
+
+- ¿Cuál es la probabilidad de que la variable aleatoria x (peso en gramos) tome valores como máximo de 502 gramos?
+
+$$P(x\leq 502)= z=\frac{502-503.3}{6.290204}= 0.4207$$
+
+```{r}
+valor_z <- (502-mean(datos$Peso))/sd(datos$Peso)
+valor_z
+
+```
+
+```{r}
+# Probabilidad obtenida con los datos reales
+pnorm(q = 502, mean = mean(datos$Peso), sd= sd(datos$Peso))
+```
+
+
+```{r}
+#Probabilidad con datos estandarizados
+pnorm(q= valor_z, mean= 0 , sd=1)
+```
+
+
+- ¿Cuál es la pobabilidad de que la variable aleatoria x tome valores entre 502 y 503.8?
+
+```{r, collapse=TRUE}
+# Valor a buscar en la tabla cuando x = 502
+valor_z502 <- (502-mean(datos$Peso))/sd(datos$Peso)
+valor_z502
+
+# Valor a buscar en la tabla cuando x = 503.8
+valor_z503.8 <- (503.8-mean(datos$Peso))/sd(datos$Peso)
+valor_z503.8
+
+# Probabilidad para valor_z502
+p_z502 <- pnorm(q = valor_z502, mean = 0, sd = 1)
+p_z502
+
+# Probabilidad para valor_z503.8
+p_z503.8 <- pnorm(q = valor_z503.8, mean = 0, sd = 1)
+p_z503.8
+
+# Probabilidad final
+p_z503.8 - p_z502
+```
+
+# Inferencia sobre $\mu$
+
+## Hipótesis inicial
+
+$$H_0: \mu = 500g \\
+H_1: \mu \neq 500g$$
+
+## Nivel de significancia
+
+$$\alpha = 0.05$$
+
+## Estadístico calculado vs teórico
+
+$$T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim\ t_{n-1}$$
+
+$$T = \frac{503.3 - 500}{6.29/\sqrt{10}} \sim\ t_{10-1}$$
+
+$$T = \frac{503.3 - 500}{6.29/\sqrt{10}} = 1.65$$
+
+```{r, collapse=TRUE}
+t_calculado <- (503.3 - 500)/(6.29/(sqrt(10))) 
+t_calculado
+```
+
+Este estadístico calculado deberá ser contrastado con los estadísticos teóricos: 
+
+$$t_{n-1,\ \alpha/2} = t_{10-1,\ 0.05/2} = t_{9,\ 0.025} = -2.26$$
+$$t_{n-1,\ 1-\alpha/2} = t_{10-1,\ 1-0.05/2} = t_{9,\ 1-0.025} = t_{9,\ 0.975} = 2.26$$
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "t-student")
+x <- seq(-4, -2.262157, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -2.262157), c(0, y, 0), col = "gray")
+x <- seq(2.262157, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(2.262157, x, 4), c(0, y, 0), col = "gray")
+abline(v = 2.262157, col = "blue", lty = 2)
+abline(v = -2.262157, col = "blue", lty = 2)
+abline(v = 1.65, col = "green3", lty = 2)
+text(x = 1.65, y = 0.09, labels = "1.65", col = "green3")
+text(x = -2.262157, y = 0.07, labels = "-2.262", col = "blue")
+text(x = 2.262157, y = 0.07, labels = "2.262", col = "blue")
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+text(x = -3.211741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+text(x = 3.21741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+```
+
+**¿Cómo encuentro los estadísticos teóricos con R?**
+
+```{r, collapse=TRUE}
+# Valor del estadístico teórico que deja un área de 0.025 a la izquierda
+t_teo1 <- qt(p = 0.025, df = 9, lower.tail = TRUE)
+t_teo1
+
+# Valor del estadístico teórico que deja un área de 0.025 a la derecha
+t_teo2 <- qt(p = 0.025, df = 9, lower.tail = FALSE)
+t_teo2
+```
+
+
+## Intervalo de confianza Valor P
+
+  - Función `t.test()`: pruebas $t-student$ para una o dos medias.
+      - `x`: datos muestrales.
+      - `mu`: valor de referencia en $H_0$
+      - `alternative`: tipo de hipótesis alternativa
+          - *"two.sided"*: prueba bilateral
+          - *"less"*: prueba unilateral izquierda
+          - *"great"* prueba unilateral derecha
+      - `conf.level`: nivel de confianza    
+
+```{r}
+# Prueba completa con R
+t.test(x = datos$Peso, mu = 500, alternative = "two.sided", conf.level = 0.95)
+```
+
+**Intervalo de confianza de forma manual:**
+
+$$\bar{x} \pm t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}$$
+
+```{r, collapse=TRUE}
+# Límite inferior del intervalo de confianza del 95%
+l_inferior <- (503.3 - ((2.2621)*(6.29/sqrt(10))))
+l_inferior
+
+# Límite superior del intervalo de confianza del 95%
+l_superior <- (503.3 + ((2.2621)*(6.29/sqrt(10))))
+l_superior
+```
+

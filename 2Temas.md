@@ -36,6 +36,7 @@ title: Temas
 - [Introducción](/Temas/14_Inferencia.pdf)
 - Inferencia sobre una población:
     - [Inferencia sobre la media](/Temas/15_UnaPob.pdf)
+        - [Ejemplo con bolsas de arroz](/Temas/Ejemplo_Arroz.html)
     - [Inferencia sobre una proporción](/Temas/16_UnaPob.pdf)
 - Inferencia sobre dos poblaciones:    
     - [Inferencia sobre dos medias](/Temas/17_dosPob.pdf)
