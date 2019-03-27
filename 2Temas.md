@@ -41,5 +41,5 @@ title: Temas
     - [Inferencia sobre dos medias](/Temas/17_dosPob.pdf)
     - [Inferencia sobre dos proporciones](/Temas/18_dosPob.pdf)
     - [Inferencia sobre dos varianzas](/Temas/19_dosPob.pdf)
-- [Ejemplos de inferencia estadística](/Temas/20_ejemplos.pdf)      
+- [Ejemplos de inferencia estadística](/Temas/20_ejemplos.html)      
 - [Tablas de contingencia](/Temas/21_tcontingencia.pdf)    

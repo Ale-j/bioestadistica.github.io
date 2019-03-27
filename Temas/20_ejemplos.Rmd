@@ -1,0 +1,879 @@
+---
+title: "Ejemplos de inferencia estadística"
+author: "Edimer David Jaramillo"
+date: "Marzo de 2019"
+output:
+  html_document:
+    theme: readable
+    css: style.css
+    highlight: tango
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Consideraciones (supuestos) {.tabset .tabset-fade .tabset-pills}
+
+  - **Normalidad**
+  - **Homocedasticidad (homogeneidad de varianzas)**
+
+## Normalidad
+
+Las pruebas de **normalidad** tienen como objetivo analizar cuánto discrepa la distribución muestral en los datos observados con referencia a lo esperado, si dicha muestra procediese de una distribución normal con la misma media $\mu$ y desviación estándar $\sigma$.
+
+Para evaluar la normalidad en los datos, es posible implementar tres mecanismos:
+
+  - **Gráficos**
+      - Histogramas y densidades
+          - **En R:** funciones `hist()` y `density()`
+      - [Gráfico cuantil-cuantil (Q-Q plot)](http://www.dm.uba.ar/materias/analisis_expl_y_conf_de_datos_de_exp_de_marrays_Mae/2006/1/teoricas/Teor4.pdf)
+          - **En R:** funciones `qqnorm()` y `qqline()`
+  - **Métodos analíticos**
+      - Muestra(s) con coeficientes de *Curtosis o Asimetría* con valores entre -1 y 1, se consideran generalmente con ligeras desviaciones de la normalidad.
+      - Muestra(s) con coeficientes de *Curtosis o Asimetría* con valores entre -2 y 2, se consideran con evidentes desviaciones de la normalidad.
+  - **Contraste de hipótesis**
+      - Test de Shapiro-Wilk
+          - **En R:** función `shapiro.test()` 
+      - Test de Kolgomorov-Smirnov
+          - **En R:** función `ks.test()` 
+      - Otros
+
+### Gráficos
+
+Los ejemplos se llevan a cabo con el conjunto de datos `iris` que trae internamente R.
+
+  - **Histogramas y densidades**
+  
+```{r, message=FALSE}
+library(ggplot2)
+ggplot(data = iris, aes(x = Sepal.Length)) +
+  geom_histogram(aes(y = ..density..), color = "black", fill = "gray60") +
+  geom_density(aes(color = "Longitud de sépalo"), lwd = 0.95) +
+  stat_function(aes(color = "Normal"), fun = dnorm, lwd = 0.95,
+                args = list(mean = mean(iris$Sepal.Length),
+                            sd = sd(iris$Sepal.Length))) +
+  scale_colour_manual("Densidad", values = c("red", "blue")) +
+  labs(x = "Longitud de sépalo", y = "Densidad",
+       title = "Distribución de la longitud de sépalo vs curva normal") +
+  theme_bw()
+```
+
+  - **Gráfico de cuantiles teóricos (Q-Q plot)**
+
+Permite comparar los cuantiles de la distribución observada con los cuantiles teóricos de una distribución normal con la misma media y desviación estándar que los datos. Cuanto más se aproximen los datos a una normal, más alineados están los puntos entorno a la recta.
+
+```{r}
+qqnorm(y = iris$Sepal.Length)
+qqline(y = iris$Sepal.Length)
+```
+
+```{r}
+library(car)
+qqPlot(iris$Sepal.Length, main = "Q-Q plot con biblioteca car")
+```
+
+### Contraste de hipótesis
+
+La hipótesis nula en este tipo de contrastes considera que los datos proceden de una distribución normal y la hipótesis alternativa plantea lo contrario.
+
+$$H_0: X \sim N(\mu, \sigma^2) \\
+H_1: X \neq N(\mu, \sigma^2)$$
+
+  - **Test de Shapiro Wilk**
+      - Se usa para tamaño muestrales menores a 50 observaciones
+      - Para tamaños muestrales mayores a 50 observaciones, es equivalente a la prueba de Kolgomorov-Smirnov.
+      - Considerar nivel $\alpha$ 
+      - Comparar el valor P con $\alpha$ y concluir
+  
+```{r}
+shapiro.test(x = iris$Sepal.Length)
+```
+
+**Conclusión:** como el valor P (0.01018) es menor que el nivel de significancia $\alpha$ (0.05), existe evidencia para rechazar $H_0$, es decir, que los datos no provienen de una población con distribución normal.
+
+  - **Test de Kolgomorov-Smirnov**
+      - Permite analizar si una muestra procede de determinada distribución, no necesariamente la normal.
+      - **Desventajas:** asume que se conoce la media y la varianza
+      - Considerar nivel $\alpha$ 
+      - Comparar el valor P con $\alpha$ y concluir      
+
+```{r, message=FALSE, warning=FALSE}
+ks.test(x = iris$Sepal.Length, y = "pnorm", mean(iris$Sepal.Length),
+        sd(iris$Sepal.Length))
+```
+
+**Conclusión:** como el valor P (0.1891) es mayor que el nivel de significancia $\alpha$ (0.05), no existe evidencia para rechazar $H_0$, es decir, que los datos provienen de una población con distribución normal.
+
+## Homocedasticidad
+
+El supuesto de homogeneidad de varianzas plantea que la varianza es constante en los diferentes niveles de un factor, es decir, homogéneo entre grupos (no varía).
+
+Existen diferentes pruebas que permiten evaluar la distribución de la varianza:
+  
+  - **F-test (razón de varianzas):** 
+      - Para poblaciones con distribución normal
+      - Robusto si se satisface la normalidad
+      - Altamente sensible a la carencia de normalidad
+      - Comparar dos varianzas
+      - **En R:** función `var.test()` 
+  - **Test de Bartlett:** 
+      - Para poblaciones con distribución normal
+      - Robusto si se satisface la normalidad
+      - **En R:** función `bartlett.test()` 
+  - **Test de Levene:** 
+      - Para poblaciones que no se distribuyen de forma normal
+      - Robusto ante la carencia de normalidad (basado en la mediana)
+      - **En R:** función `leveneTest()` (instalar biblioteca `car`)
+  
+### Gráficos
+
+Suponga que se quiere observar si existen diferencias estadísticas entre las varianzas de la longitud del pétalo entre las especies de flores versicolor y setosa del conjunto de datos `iris`.
+
+```{r}
+datos_filtrados <- iris[iris$Species == "setosa" | iris$Species == "versicolor",]
+
+ggplot(data = datos_filtrados, aes(x = Species, y = Petal.Length, colour = Species)) +
+  geom_boxplot() +
+  geom_point() +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+### Contraste de hipótesis
+
+Todas las pruebas para comparar varianzas consideran como hipóteis nula que la varianza es igual entre los grupos y como hipótesis alternativa lo contrario.
+
+$$H_0: \sigma^2_1 = \sigma^2_2 \\
+H_1: \sigma^2_1 \neq \sigma^2_2 $$
+
+  - **F-test:**
+
+```{r}
+var.test(x = iris[iris$Species == "versicolor", "Petal.Length"],
+         y = iris[iris$Species == "setosa", "Petal.Length"])
+```
+
+**Conclusión:** como el valor P (1.026e-10) es menor que alfa (0.05), existe evidencia para concluir que la especie setosa y la especie versicolor, presentan diferencias estadísticas en la varianza de la longitud del pétalo.
+
+  - **Test de Bartlett:**
+
+En este caso, suponga que se quiere contrastar si existe diferencia entre la varianza de alguna de las tres especies de flores (setosa, versicolor y virginica).
+
+```{r}
+ggplot(data = iris, aes(x = Species, y = Petal.Length, colour = Species)) +
+  geom_boxplot() +
+  geom_point() +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+```{r}
+bartlett.test(iris$Petal.Length ~ iris$Species)
+```
+
+**Conclusión:** como el valor P (9.229e-13) es menor que alfa (0.05), existe evidencia para concluir que al menos dos especies de flores presentan diferencias estadísticas en la varianza de la longitud del pétalo.
+
+  - **Test de Levene:**
+  
+```{r}
+library(car)
+leveneTest(y = iris$Petal.Length, group = iris$Species)
+```
+
+**Conclusión:** como el valor P (3.129e-08) es menor que alfa (0.05), existe evidencia para concluir que al menos dos especies de flores presentan diferencias estadísticas en la varianza de la longitud del pétalo.
+
+# Ejemplos para $\mu$
+
+## Ejemplo 1 {.tabset .tabset-fade .tabset-pills}
+
+En la base de datos `Soils` del paquete `car` de *R* hay información de muestras de suelo provenientes de cuatro áreas diferentes (`Block`), en tres tipos de contornos (`Top`, `Slope`, y `Depression`) y tomadas a cuatro profundidades (`0-10`, `10-30`, `30-60`, `60-90`).
+
+```{r}
+head(Soils)
+```
+
+  1. Para la variable `pH`, construir un intervalo de confianza del 95% para $\mu$.
+  2. Para la variable nitrógeno (`N`), construir un intervalo de confianza del 90% para $\mu$.
+  3. Para la variable fósforo (`P`), construir un intervalo de confianza del 99% para $\mu$.
+  4. Suponga que se conoce que en esa región donde se tomaron las muestras el pH promedio es 6.5. A través de una prueba de hipótesis responder si la media de los datos muestrales es congruente con el pH promedio de la región.
+  5. ¿Se cumple el supuesto de normalidad en la variable `pH`?
+  6. Contrastar si existen diferencias estadísticamente significativas para el `pH` entre el contorno `Slope` y `Depression`, asumiendo que las varianzas son desconocidas e iguales. 
+
+### Solución Manual
+
+**Nota:** para la solución manual, R se utiliza sólo como una calculadora, sin implementar ninguna función, a excepción de la función `mean()` y `sd()` para obtener la media y desviación, respectivamente.
+
+  1. **Para la variable `pH`, construir un intervalo de confianza del 95% para $\mu$.**
+
+Para resolverlo manualmente es posible seguir los siguientes pasos:
+
+  - Definir el nivel de significancia $\alpha$
+  - Obtener la media muestral $\bar{X}$
+  - Obtener la desviación muestral $S$ (para este ejemplo la varianza es desconocida)
+  - Calcular el límite inferior
+  - Calcular el límite superior
+  - Interpretar el intervalo de confianza
+
+Para obtener los límites del intervalo, se resuelve la siguiente expresión:
+$$\bar{X}-t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}<\mu<\bar{X}+t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}$$ 
+Tomando el nivel de significancia $\alpha$ igual a 5%, el $t_{\alpha/2,\ n-1}=t_{0.05/2,\ 48-1}$:
+
+  - La base de datos tiene 48 registros, por tanto, $48-1=47$ grados de libertad
+  - $t_{0.05/2,\ 48-1}=t_{0.025,\ 47}=-2.011$
+  - $t_{1- 0.05/2,\ 48-1}=t_{1-0.025,\ 47}=t_{0.975,\ 47}=2.011$
+
+```{r}
+qt(p = 0.025, df = 47) #función qt para hallar el valor (cuantil) de t de alfa/2
+qt(p = 0.975, df = 47) #función qt para hallar el valor (cuantil) de t de alfa/2
+```
+  
+  - Este proceso con la función `qt()` corresponde a la búsqueda de dicho valor en la tabla $t-student$.
+  - La media de la variable `pH` es:
+
+```{r}
+mean(Soils$pH)
+```
+
+  - La desviación estándar de la variable `pH` es:
+
+```{r}
+sd(Soils$pH)
+```
+
+El intervalo de confianza con $\alpha$ igual a 5% para el `pH` es: 
+$$4.669-2.011\frac{0.671}{\sqrt{48}}<\mu_{pH}<4.669+2.011\frac{0.671}{\sqrt{48}} \\
+= 4.474<\mu_{pH}<4.863$$ 
+
+```{r}
+Limite_inferior <- 4.669-((2.011)*(0.671/sqrt(48)))
+Limite_inferior
+```
+
+```{r}
+Limite_superior <- 4.669+((2.011)*(0.671/sqrt(48)))
+Limite_superior
+```
+
+**Interpretación:** 
+
+  - Con un nivel de confianza del 95%, se espera que el valor promedio del pH esté entre 4.474 y 4.863, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 48 se espera que 95 de ellos contengan el verdadero valor de $\mu_{pH}$.
+
+  2. **Para la variable nitrógeno (`N`), construir un intervalo de confianza del 90% para $\mu$**
+  
+Para obtener los límites del intervalo, se resuelve la siguiente expresión:
+$$\bar{X}-t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}<\mu<\bar{X}+t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}$$ 
+Tomando el nivel de significancia $\alpha$ igual a 10%, el $t_{\alpha/2,\ n-1}=t_{0.10/2,\ 48-1}$:
+
+  - $t_{0.10/2,\ 48-1}=t_{0.05,\ 47}=-1.677$
+  - $t_{1- 0.10/2,\ 48-1}=t_{1-0.05,\ 47}=t_{0.95,\ 47}=1.677$
+
+```{r}
+qt(p = 0.05, df = 47) #función qt para hallar el valor (cuantil) de t de alfa/2
+qt(p = 0.95, df = 47) #función qt para hallar el valor (cuantil) de t de alfa/2
+```
+
+  - La media de la variable `N` es:  
+
+```{r}
+mean(Soils$N)
+```
+
+  - La desviación estándar de la variable `N` es:
+
+```{r}
+sd(Soils$N)
+```
+
+El intervalo de confianza con $\alpha$ igual a 10% para el `N` es: 
+$$0.101-1.677\frac{0.067}{\sqrt{48}}<\mu_{N}<0.101+1.677\frac{0.067}{\sqrt{48}} \\
+= 0.084<\mu_{N}<0.117$$ 
+
+```{r}
+Limite_inferior <- 0.101-((1.677)*(0.067/sqrt(48)))
+Limite_inferior
+```
+
+```{r}
+Limite_superior <- 0.101+((1.677)*(0.067/sqrt(48)))
+Limite_superior
+```
+
+**Interpretación:** 
+
+  - Con un nivel de confianza del 90%, se espera que el valor promedio del `N` esté entre 0.084 y 0.117, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 48 se espera que 90 de ellos contengan el verdadero valor de $\mu_{N}$.
+
+  3. **Para la variable fósforo (`P`), construir un intervalo de confianza del 99% para $\mu$**
+
+Para obtener los límites del intervalo, se resuelve la siguiente expresión:
+$$\bar{X}-t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}<\mu<\bar{X}+t_{\alpha/2,\ n-1}\frac{S}{\sqrt{n}}$$ 
+
+Tomando el nivel de significancia $\alpha$ igual a 1%, el $t_{\alpha/2,\ n-1}=t_{0.01/2,\ 48-1}$:
+
+  - $t_{0.01/2,\ 48-1}=t_{0.005,\ 47}=-2.684$
+  - $t_{1- 0.01/2,\ 48-1}=t_{1-0.005,\ 47}=t_{0.995,\ 47}=2.684$
+
+```{r}
+qt(p = 0.005, df = 47) #función qt para hallar el valor (cuantil) de t de alfa/2
+qt(p = 0.995, df = 47) #función qt para hallar el valor (cuantil) de t de alfa/2
+```
+
+  - La media de la variable `N` es:  
+
+```{r}
+mean(Soils$P)
+```
+
+  - La desviación estándar de la variable `P` es:
+
+```{r}
+sd(Soils$P)
+```
+
+El intervalo de confianza con $\alpha$ igual a 1% para el `P` es: 
+$$166.16-2.684\frac{81.160}{\sqrt{48}}<\mu_{P}<166.16+2.684\frac{81.160}{\sqrt{48}} \\
+= 134.71<\mu_{P}<197.60$$ 
+
+```{r}
+Limite_inferior <- 166.16-((2.684)*(81.160/sqrt(48)))
+Limite_inferior
+```
+
+```{r}
+Limite_superior <- 166.16+((2.684)*(81.160/sqrt(48)))
+Limite_superior
+```
+
+**Interpretación:** 
+
+  - Con un nivel de confianza del 99%, se espera que el valor promedio del `P` esté entre 134.71 y 197.60, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 48 se espera que 99 de ellos contengan el verdadero valor de $\mu_{P}$.
+
+  4. **Suponga que se conoce que en esa región donde se tomaron las muestras el pH promedio es 6.5. A través de una prueba de hipótesis responder si la media de los datos muestrales es congruente con el pH promedio de la región**
+  
+  - Definir el juego de hipótesis
+  - Calcular el estadístico 
+  - Nivel de significancia igual a 5% ($\alpha = 0.05$)
+  - **Criterio de decisión:** región de rechazo (en este caso)
+  - Comparar estadístico $t_{observado}$ vs $t_{teórico}$
+  - Concluir
+  
+
+**Juego de hipótesis:** 
+ $$H_0: \mu_{pH} = 6.5 \\
+  H_1: \mu_{pH} \neq 6.5$$
+  
+**Estadístico $t$:**
+
+```{r}
+mean(Soils$pH) #promedio de pH
+sd(Soils$pH) #desviación estándar (S) de pH
+```
+
+$$t_{observado} = \frac{\bar{X}-\mu_0}{S/\sqrt{n}} \\
+= \frac{4.6693 - 6.5}{0.6178/\sqrt{48}} \\
+= -18.87$$
+
+```{r}
+t_observado <- (4.669375-6.5)/((0.6718549/sqrt(48)))
+t_observado
+```
+
+```{r}
+t_teorico_ <- qt(p = 0.025, df = 47)
+t_teorico_
+```
+
+**Región de rechazo:**
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "t-student")
+x <- seq(-4, -2.011741, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -2.011741), c(0, y, 0), col = "gray")
+x <- seq(2.011741, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(2.011741, x, 4), c(0, y, 0), col = "gray")
+text(x = -2.011741, y = 0.07, labels = "-2.011", col = "blue")
+text(x = 2.011741, y = 0.07, labels = "2.011", col = "blue")
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+```
+
+Las áreas grises indican las zonas de rechazo, es decir, que si el estadístico $t_{observado}$ es menor o mayor a -2.011 y 2.011, respectivamente, existirá evidencia para rechazar la hipótesis nula con un nivel de significancia $\alpha$.
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "t-student")
+x <- seq(-4, -2.011741, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -2.011741), c(0, y, 0), col = "gray")
+x <- seq(2.011741, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(2.011741, x, 4), c(0, y, 0), col = "gray")
+abline(v = 2.011741, col = "blue", lty = 2)
+abline(v = -2.011741, col = "blue", lty = 2)
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+text(x = -3.011741, y = 0.07, labels = "Rechazo de H0", col = "blue")
+text(x = 3.011741, y = 0.07, labels = "Rechazo de H0", col = "blue")
+```
+
+$$t_{observado} = \frac{\bar{X}-\mu_0}{S/\sqrt{n}} \\
+= \frac{4.6693 - 6.5}{0.6718/\sqrt{48}} \\
+= -18.87$$
+
+**Conclusión:** como el estadístico $t_{observado}$ (-18.87) está dentro de la zona de rechazo, con un nivel de confianza del 95%  existe suficiente evidencia para rechazar la hipótesis nula, es decir, que la media del pH de la muestra difiere de la media del pH en la región.
+
+  5. **¿Se cumple el supuesto de normalidad en la variable pH?**
+
+Este punto se desarrolló solamente mediante R.
+
+  6. **Contrastar si existen diferencias estadísticamente significativas para el `pH` entre el contorno `Slope` y `Depression`, asumiendo que las varianzas son desconocidas e iguales**
+
+  - En este caso, no se conoce la varianza pero se sabe que son iguales, por tanto, el estadístico está definido por la siguiente expresión:
+  
+$$t = \frac{\bar{X_1}-\bar{X_2}}{S_p\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}$$
+Donde $S_p$ es: $$S_p = \frac{(n_1 - 1)S_1 + (n_2 -1)S_2}{n_1+n_2-2}$$
+
+**Número de datos por muestra:**
+
+```{r}
+ph_slope <- Soils[Soils$Contour == "Slope", "pH"] #vector con los datos de pH para Slope 
+ph_depression <- Soils[Soils$Contour == "Depression", "pH"] #vector con los datos de pH para Depression 
+length(ph_slope) #n1
+length(ph_depression) #n2
+```
+
+**Media de pH para Slope y Depression**
+
+```{r}
+mean(ph_slope)
+mean(ph_depression)
+```
+
+**Desviación de pH para Slope y Depression**
+
+```{r}
+sd(ph_slope)
+sd(ph_depression)
+```
+
+**Varianza de pH para Slope y Depression**
+
+```{r}
+var(ph_slope)
+var(ph_depression)
+```
+
+**$S_p$:**
+
+$$S_p = \frac{(16 - 1)0.8487 + (16 -1)0.5430}{16+16-2} \\
+= 13.002$$
+
+```{r}
+sp <- ((16-1)*0.8487) + ((16-1)*0.5430)/(16+16-2)
+sp
+```
+
+**El estadístico $t_{observado}$ es:**
+
+$$t = \frac{4.742-4.691}{13.002\sqrt{\frac{0.720}{16}+\frac{0.294}{16}}} = 0.0166$$
+```{r}
+t_observado <- (4.74625-4.691875)/(13.002*sqrt((0.7203583/16)+(0.2948963/16)))
+t_observado
+```
+
+**Nivel $\alpha$ y $t_{teórico}$**
+
+  - Juego de hipótesis: $$H_0: \mu_{pHSlope} = \mu_{pHDepression} \\
+  H_1: \mu_{pHSlope} \neq \mu_{pHDepression}$$
+  - Se fija un nivel de significancia del 5%
+  - $t \sim t_v$, con $v$ grados de libertan. Donde $v = n_1 + n_2 - 2$
+  - $t_v=t_{n_1+n_2-2}=t_{16+16-2}=t_{30}$
+  - $t_{\alpha/2,\ v}=t_{0.05/2,\ 30}=-2.042$
+  - $t_{1-\alpha/2,\ v}=t_{1-0.05/2,\ 30}=2.042$
+
+```{r}
+qt(p = 0.025, df = 30)
+qt(p = 0.025, df = 30)
+```
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "t-student")
+x <- seq(-4, -2.042272, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -2.042272), c(0, y, 0), col = "gray")
+x <- seq(2.042272, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(2.042272, x, 4), c(0, y, 0), col = "gray")
+abline(v = 2.042272, col = "blue", lty = 2)
+abline(v = -2.042272, col = "blue", lty = 2)
+abline(v = 0.01661231, col = "green3", lty = 2)
+text(x = 0.01661231, y = 0.09, labels = "0.0166", col = "green3")
+text(x = -2.042272, y = 0.07, labels = "-2.042", col = "blue")
+text(x = 2.042272, y = 0.07, labels = "2.042", col = "blue")
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+```
+
+**Interpretación:**
+
+  - Como el $t_{observado}$ o $t_{calculado}$ está dentro de la zona de no rechazo, hay evidencia para afirmar que no existe diferencia estadística en el promedio del pH entre el contorno Slope y Depression, es decir, que en promedio para el pH son iguales. Todo lo anterior, con un nivel de confianza del 95%.
+
+### Solución con R
+
+  1. **Para la variable `pH`, construir un intervalo de confianza del 95% para $\mu$**
+
+  - Un intervalo de confianza  para $\mu$, con R puede ser obtenido con la función `t.test()`
+  - La función `t.test()` arroja además de los límites del intervalo de confianza, el valor P y el estadístico $t$.
+  - Si se pretende extraer sólo la información de los intervalos de confianza, es suficiente con incorporar el resultado de `t.test()` en una nueva variable y a partr de esta, extraer el resultado que se requiera. Esto con la finalidad de **no** presentar el resultado completo, dado que no es necesario en algunos casos (como en este numeral del ejemplo).
+
+  - **Resultado completo:**
+  
+```{r}
+t.test(x = Soils$pH, conf.level = 0.95)
+```
+
+Note que los límites del intervalo de confianza son los mismos obtenidos de manera manual. La interpretación es la misma; con un nivel de confianza del 95%, se espera que el valor promedio del pH esté entre 4.474 y 4.863, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 48 se espera que 95 de ellos contengan el verdadero valor de $\mu_{pH}$.
+
+  - **Resultado necesario (intervalo de confianza):**
+
+```{r}
+ic_ph <- t.test(x = Soils$pH, conf.level = 0.95)
+names(ic_ph) #nombres de los resultados de ic_ph producto del t.test()
+ic_ph["conf.int"] #Mostrando sólo el resultado que compete a los intervalos de confianza
+```
+
+  2. **Para la variable nitrógeno (`N`), construir un intervalo de confianza del 90% para $\mu$**
+
+
+```{r}
+ic_N <- t.test(x = Soils$N, conf.level = 0.90)
+ic_N["conf.int"] #Mostrando sólo el resultado que compete a los intervalos de confianza
+```
+
+**Interpretación:** 
+
+  - Con un nivel de confianza del 90%, se espera que el valor promedio del `N` esté entre 0.0856 y 0.1182, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 48 se espera que 90 de ellos contengan el verdadero valor de $\mu_{N}$.
+
+  3. **Para la variable fósforo (`P`), construir un intervalo de confianza del 99% para $\mu$**
+
+```{r}
+ic_P <- t.test(x = Soils$P, conf.level = 0.99)
+ic_P["conf.int"] #Mostrando sólo el resultado que compete a los intervalos de confianza
+```
+
+**Interpretación:** 
+
+  - Con un nivel de confianza del 99%, se espera que el valor promedio del `P` esté entre 134.71 y 197.61, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 48 se espera que 99 de ellos contengan el verdadero valor de $\mu_{P}$.
+
+  4. **Suponga que se conoce que en esa región donde se tomaron las muestras el pH promedio es 6.5. A través de una prueba de hipótesis responder si la media de los datos muestrales es congruente con el pH promedio de la región**
+  
+  - Para solucionarlo con R simplemente hay que ejecutar la función `t.test()` de la siguiente manera:
+
+```{r}
+t.test(x = Soils$pH, mu = 6.5, alternative = "two.sided", conf.level = 0.95)
+```
+
+**Interpretación:**
+
+  - **Valor P:** como el valor P (< 2.2e-16) es menor que $\alpha = 0.05$, existe evidencia para rechazar la hipótesis nula, es decir, que la media del pH de la muestra difiere de la media del pH en la región.
+  - **Intervalos de confianza:** como el intervalo de confianza no contiene a 6.5, existe evidencia en contra de la hipótesis nula, es decir, que la media del pH de la muestra difiere de la media del pH en la región.
+
+  5. **¿Se cumple el supuesto de normalidad en la variable pH?**
+
+  - **Gráficos:**
+
+```{r}
+library(car)
+par(mfrow = c(1, 2))
+qqPlot(Soils$pH, main = "QQ plot del pH", ylab = "pH")
+hist(Soils$pH, xlab = "pH", ylab = "Frecuencia", main = "Distribución del pH",
+     col = "gray50", nclass = 15, probability = TRUE)
+lines(density(x = Soils$pH), lwd = 1.5, col = "red")
+```
+
+  - **Contraste de hipótesis Shapiro Wilk y Kolgomorov-Smirnov:**
+
+El juego de hipótesis se define en términos de si se distribuye o no la variable aleatoria, como una distribución normal. En este caso, la variable aleatoria es el pH.
+
+$$H_0: X \sim N(0,1) \\
+H_1: X \neq N(0,1)$$
+
+```{r}
+shapiro.test(Soils$pH)
+ks.test(x = Soils$pH, "pnorm")
+```
+
+**Conclusión:** con los gráficos y los contrastes de hipótesis a través de las pruebas de Shapiro-Wilk y Kolgomorov-Smirnov, es posible concluir que dicha muestra del pH no proviene de una población con distribución normal.
+
+  6. **Contrastar si existen diferencias estadísticamente significativas para el `pH` entre el contorno `Slope` y `Depression`, asumiendo que las varianzas son desconocidas e iguales.**
+
+```{r}
+ph_slope <- Soils[Soils$Contour == "Slope", "pH"] #vector con los datos de pH para Slope 
+ph_depression <- Soils[Soils$Contour == "Depression", "pH"] #vector con los datos de pH para Depression 
+
+t.test(x = ph_slope, y = ph_depression, alternative = "two.sided", mu = 0, var.equal = TRUE)
+```
+
+**Interpretación:**
+
+  - Como el valor P (0.8306) es mayor que alfa (0.05), no existe evidencia para afirmar que hay diferencia estadística en el promedio del pH entre el contorno Slope y Depression, es decir, que no existe evidencia suficiente para rechazar $H_0$.
+  - El intervalo de confianza ($-0.4600726, 0.5688226$) contiene al cero, por lo cual no es posible rechazar la hipótesis nula.
+
+## Ejemplo 2 
+
+Un fabricante de determinada marca de vehículos de alta gama anuncia en la publicidad que el combustible promedio necesario para llevar a cabo un recorrido de 100 kilómetros es de 18.5 galones. Se toman dos muestras de 10 carros cada una y se observa el consumo cada 100 kilómetros recorridos, obteniendo las siguientes mediciones:
+
+| Muestra 1 | Muestra 2 |
+| :-------: | :-------: |
+| 19.2 | 20.1 |
+| 20.8 | 18.6 |
+| 20.5 | 17.9 |
+| 18.7 | 16.5 |
+| 19.3 | 21.2 |
+| 20.2 | 17.1 |
+| 20.4 | 18.6 |
+| 19.9 | 19.6 |
+| 18.7 | 19.4 |
+| 16.5 | 17.9 |
+
+obtenga:
+
+  1. Un IC del 95% para la muestra 1
+  2. Basado en los IC, ¿la afirmación del fabricante es cierta?
+  3. Si existen diferencias estadísticas en el promedio de galones consumidos entre las dos muestras (contraste de hipótesis)
+
+### Solución con R
+
+  1. **Obtener un IC del 95% para ambas muestras**
+
+```{r}
+muestra1 <- c(19.2, 20.8, 20.5, 18.7, 19.3, 20.2, 20.4, 19.9, 18.7, 16.5)
+muestra2 <- c(20.1, 18.6, 17.9, 16.5, 21.2, 17.1, 18.6, 19.6, 19.4, 17.9)
+```
+
+```{r}
+ic_m1 <- t.test(x = muestra1, conf.level = 0.95)
+ic_m1["conf.int"] #Mostrando sólo el resultado que compete a los intervalos de confianza
+```
+
+**Interpretación:**
+
+  - Con un nivel de confianza del 95%, se espera que el valor promedio del consumo de combustible (en galones) esté entre 18.512 y 20.327, es decir, que de 100 intervalos construidos a partir de muestras de tamaño 10 se espera que 95 de ellos contengan el verdadero valor de $\mu_{consumo}.
+
+  2. **Basado en los IC, ¿la afirmación del fabricante es cierta?**
+  
+```{r}
+ic_m1 <- t.test(x = muestra1, conf.level = 0.95) #intervalo de confianza muestra 1
+ic_m1["conf.int"] 
+```
+
+```{r}
+ic_m2 <- t.test(x = muestra2, conf.level = 0.95) #intervalo de confianza muestra 2
+ic_m2["conf.int"] 
+```
+
+**Interpretación:**
+
+  - Con el intervalo de confianza del 95% para la muestra 1 (entre 18.512 y 20.327) es posible afirmar que el fabricante dice "mentiras" en la publicidad, ya que el intervalo no contiene el valor de 18.5 galones.
+  - Con el intervalo de confianza del 95% para la muestra 1 (entre 17.672 y 19.707) es posible afirmar que el fabricante dice la verdad en la publicidad, ya que el intervalo contiene el valor de 18.5 galones.
+
+  3. **¿Existen diferencias estadísticas en el promedio de galones consumidos entre las dos muestras (contraste de hipótesis)?**
+
+**Juego de hipótesis:**
+
+$$H_0: \mu_{muestra1} = \mu_{muestra2} \\
+H_1: \mu_{muestra1} \neq \mu_{muestra2}$$
+
+**Nivel $\alpha = 0.05$**
+
+**Comprobar si las varianzas son iguales**
+
+```{r}
+par(mfrow = c(1, 2))
+boxplot(muestra1, col = "gray45", main = "Boxplot muestra 1", ylab = "Galones/100 Km")
+boxplot(muestra2, col = "gray45", main = "Boxplot muestra 2", ylab = "Galones/100 Km")
+```
+
+**Comprobar si existe normalidad**
+
+```{r}
+par(mfrow = c(1, 2))
+qqPlot(muestra1, main = "Q-Q plot muestra 1")
+qqPlot(muestra2, main = "Q-Q plot muestra 2")
+```
+
+Basado en los gráficos, es posible inferir que se cumplen la normalidad y la igualdad de varianzas. Por tanto, el contraste de hipótesis se realiza teniendo en cuenta que las varianzas son desconocidas pero iguales.
+
+**Contraste de hipótesis:**
+
+```{r}
+t.test(x = muestra1,                    #muestra 1
+       y = muestra2,                    #muestra 2
+       conf.level = 0.95,               #nivel de confianza
+       alternative = "two.sided",       #prueba bilateral
+       var.equal = TRUE)                #igualdad de varianzas
+```
+
+**Conclusión:**
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "t-student")
+x <- seq(-4, -2.262157, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -2.262157), c(0, y, 0), col = "gray")
+x <- seq(2.262157, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(2.262157, x, 4), c(0, y, 0), col = "gray")
+abline(v = 2.262157, col = "blue", lty = 2)
+abline(v = -2.262157, col = "blue", lty = 2)
+abline(v = 1.211, col = "green3", lty = 2)
+text(x = 1.211, y = 0.09, labels = "1.211", col = "green3")
+text(x = -2.262157, y = 0.07, labels = "-2.262", col = "blue")
+text(x = 2.262157, y = 0.07, labels = "2.262", col = "blue")
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+text(x = -3.211741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+text(x = 3.21741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+```
+
+  - $t_{observado} = 1.211$: está en la zona de no rechazo.
+  - El valor P (0.2416) es mayor que el alfa de 0.05.
+  - El IC de confianza (entre -0.536 y 1.996) contiene al cero.
+  - **Conclusión:** con cualquiera de los tres criterios, es posible afirmar que no existe evidencia suficiente para rechazar la hipótesis nula, es decir, que en promedio, el consumo de combustible entre la muestra 1 y la muestra 2, no es diferente. Todo lo anterior, con un nivel de significancia del 5%.
+
+## Ejemplo 3
+
+### Solución con R
+
+Se realiza un experimento donde se midió la producción de vainas de fríjol por cada planta producida, en 12 unidades experimentales bajo las mismas condiciones. La muestra está compuesta por las siguientes observaciones:
+
+| Vainas |
+| :----: |
+| 18 |
+| 11 |
+| 17 |
+| 10 |
+| 20 |
+| 25 |
+| 13 |
+| 16 |
+| 25 |
+| 20 |
+| 19 |
+| 20 |
+
+  - Comprobar la normalidad
+  - Obtener un IC del 95% para la producción de vainas por planta
+
+**Comprobando normalidad:**
+
+```{r}
+vainas_frijol <- c(18,11,17,10,20,25,13,16,25,20,19,20)
+```
+
+```{r}
+par(mfrow = c(1, 2))
+hist(vainas_frijol, main = "Distribución del número de vainas",
+     probability = TRUE, col = "gray45")
+lines(density(vainas_frijol), lwd = 2, col = "red")
+qqPlot(vainas_frijol, main = "Gráfico QQ número de vainas")
+```
+
+```{r}
+shapiro.test(vainas_frijol)
+```
+
+**Conclusión:** se acepta la normalidad en la distribución del número de vainas en fríjol, los gráficos y la prueba de Shapiro Wilk permiten afirmar que dicha muestra proviene de una población con distribución normal.
+
+  - **Obtener un IC del 95% para la producción de vainas por planta**
+
+```{r}
+ic_vainas <- t.test(x = vainas_frijol, conf.level = 0.95)
+ic_vainas$conf.int
+```
+
+**Interpretación:** con un nivel de confianza del 95% es posible afirmar que el verdadero valor promedio de la producción de vainas en fríjol, está entre 14.78 y 20.88 vainas. Si se tomaran nuevas muestras, se espera que el 95% de los intervalos contengan el verdadero valor de $\mu$.
+
+# Ejemplo para $\sigma^2$
+
+El conjunto de datos `PlantGrowth` de R, contiene resultados de un experimento para comparar los rendimientos (medido por el peso seco de las plantas) obtenidos de una tratamiento control (`ctrl`) y dos tratamientos adiciones (`trt1` y `trt2`). Obtener:
+
+  - Contrastar si existe diferencia entre la varianza del tratamiento 1 y el control.
+
+### Solución con R
+
+R contiene la función `var.test()` a partir de la cual se pueden hacer pruebas de hipótesis para dos poblaciones. Al igual que la función `t.test()`, da como resultado el estadístico, el valor P y el intervalo de confianza.
+
+**Conjunto de datos:**
+
+```{r}
+head(PlantGrowth)
+```
+
+**Contraste de hipótesis**
+
+$$H_0: \sigma^2_{trt1} = \sigma^2_{ctrl} \\
+H_1: \sigma^2_{trt1} \neq \sigma^2_{ctrl}$$
+
+```{r}
+var.test(x = PlantGrowth[PlantGrowth$group == "trt1", "weight"], 
+         y = PlantGrowth[PlantGrowth$group == "ctrl", "weight"],
+         alternative = "two.sided",
+         ratio = 1,
+         conf.level = 0.95)
+```
+
+**Interpretación:** dado que el valor P (0.3719) es mayor que alfa (0.05) y el intervalo de confianza (del cociente) contiene al 1 (entre 0.460 y 7.459), existe suficiente evidencia para no rechazar la hipótesis nula, es decir, que la varianza del tratamiento 1 y el tratamiento control, no difieren entre si. Todo lo anterior con un nivel de significancia del 5%.
+
+# Ejemplo para $p$
+
+Se tienen los resultados de una encuesta en la que participaron 56 estudiantes, de los cuales 39 respondieron que sí habían tenido contacto con algún lenguaje de programación y 17 respondieron que no. Con esta información construya:
+
+  - Un IC del 95% para la propoción esperada de estudiantes de la facultad de Ciencias Agrarias de la Universidad Nacional de Colombia sede Medellín, que han tenido contacto con algún lenguaje de programación.
+  - A través de una prueba de hipótesis responda si se espera que esta proporción sea menor al 40%.
+  
+### Solución con R
+
+R contiene la función `prop.test()` a partir de la cual se pueden hacer pruebas de hipótesis para una o dos poblaciones. Al igual que las funciones `t.test()` y `var.test()`, da como resultado el estadístico, el valor P y el intervalo de confianza.
+
+  - **Un IC del 95% para la propoción esperada de estudiantes de la facultad de Ciencias Agrarias de la Universidad Nacional de Colombia sede Medellín, que han tenido contacto con algún lenguaje de programación.**
+
+```{r}
+encuesta <- read.csv("Encuesta.csv")
+table(encuesta$LenguajeP)
+```
+
+**Proporción observada de los que sí han tenido contacto con algún lenguaje de programación:**
+
+```{r}
+proporcion_lp <- 17/56
+proporcion_lp
+```
+
+**Intervalo de confianza:**
+
+```{r}
+ic_proporcion <- prop.test(x = 17, n = 56, conf.level = 0.95)
+ic_proporcion$conf.int
+```
+
+**Interpretación:** con un nivel de confianza del 95%, se espera que la verdadera proporción de estudiantes en la facultad de Ciencias Agrarias que sí han tenido contacto con un lenguaje de programación esté entre 0.191 y 0.442, es decir, entre el 19.1 y 44.2%.
+
+  - **A través de una prueba de hipótesis responda si se espera que esta proporción sea menor al 40%.**
+
+$\alpha = 0.05$ y nivel de confiana del 95%.
+
+$$H_0: p = 0.40 \\
+H_1: p < 0.40$$
+
+```{r}
+prop.test(x = 17, n = 56, p = 0.40, alternative = "less", conf.level = 0.95)
+```
+
+**Interpretación:** dado que el valor P (0.09068) es mayor que alfa y el intervalo de confianza contiene la proporción contrastada (40%), existe suficiente evidencia para no rechazar la hipótesis nula, es decir, que la proporción esperada de estudiantes que sí hayan tenido contacto con algún lenguaje de programación en la facultad de Ciencias Agrarias, es igual o mayor a 40%.
