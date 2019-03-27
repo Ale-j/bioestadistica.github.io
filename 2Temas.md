@@ -36,3 +36,10 @@ title: Temas
 - [Introducción](/Temas/14_Inferencia.pdf)
 - Inferencia sobre una población:
     - [Inferencia sobre la media](/Temas/15_UnaPob.pdf)
+    - [Inferencia sobre una proporción](/Temas/16_UnaPob.pdf)
+- Inferencia sobre dos poblaciones:    
+    - [Inferencia sobre dos medias](/Temas/17_dosPob.pdf)
+    - [Inferencia sobre dos proporciones](/Temas/18_dosPob.pdf)
+    - [Inferencia sobre dos varianzas](/Temas/19_dosPob.pdf)
+- [Ejemplos de inferencia estadística](/Temas/20_ejemplos.pdf)      
+- [Tablas de contingencia](/Temas/21_tcontingencia.pdf)    
