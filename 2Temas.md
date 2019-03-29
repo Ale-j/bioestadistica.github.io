@@ -40,6 +40,7 @@ title: Temas
     - [Inferencia sobre una proporción](/Temas/16_UnaPob.pdf)
 - Inferencia sobre dos poblaciones:    
     - [Inferencia sobre dos medias](/Temas/17_dosPob.pdf)
+        - [Ejemplo con bolsas de arroz](/Temas/Ejemplo_Arroz2.html)
     - [Inferencia sobre dos proporciones](/Temas/18_dosPob.pdf)
     - [Inferencia sobre dos varianzas](/Temas/19_dosPob.pdf)
 - [Ejemplos de inferencia estadística](/Temas/20_ejemplos.html)      

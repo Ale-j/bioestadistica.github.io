@@ -1,0 +1,176 @@
+---
+title: "Ejemplo de inferencia sobre dos medias"
+subtitle: "Bioestadística 1"
+author: "Edimer David Jaramillo"
+date: "Marzo de 2019"
+output:
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Datos de pesos de arroz
+
+```{r}
+# Ingresando datos
+peso <- c(486, 503, 504,  505, 506, 506, 503, 505, 507, 508)
+marca <- c("Otra", "Caribe", "Caribe", "Otra", "Caribe", "Orquidea", "Orquidea",
+           "Orquidea", "Otra", "Otra")
+
+# Base de datos
+datos <- data.frame(Peso = peso,
+                    Marca = marca)
+```
+
+## Base de datos
+
+  - **n:**  10 datos
+  - **Variables:**
+      - Peso en gramos
+      - Marca de arroz
+  - **Filas:** cada fila representa un individuo (libra de arroz).
+  - **Marca caribe:** 3 datos
+  - **Marca Orquidea:** 3 datos
+  - **Marca otra:** 4 datos.
+  
+```{r, collapse=TRUE}
+# Datos por marca
+orquidea <- datos[datos$Marca == "Orquidea", ]
+caribe   <- datos[datos$Marca == "Caribe", ]
+otra     <- datos[datos$Marca == "Otra", ]
+
+#
+orquidea
+caribe 
+otra
+```
+
+## Estadísticos descriptivos por marca
+
+### Promedio de peso por marca
+
+```{r}
+tapply(X = datos$Peso, INDEX = datos$Marca, FUN = mean)
+```
+
+### Desviación  de peso por marca
+
+```{r}
+tapply(X = datos$Peso, INDEX = datos$Marca, FUN = sd)
+```
+
+### Mediana  de peso por marca
+
+```{r}
+tapply(X = datos$Peso, INDEX = datos$Marca, FUN = median)
+```
+
+## Boxplot comparativo
+
+```{r}
+boxplot(datos$Peso ~ datos$Marca, main = "Distribución de peso por marca de arroz",
+        xlab = "Marca", ylab = "Peso (g)")
+abline(h = mean(datos$Peso), lwd = 2, col = "red", lty = 2)
+```
+
+# Inferencia sobre $\mu_1 - \mu_2$
+
+**Nota:** en el ejemplo se va a comparar la media del peso de orquidea vs media del peso de caribe. Asuma que las varianzas son desconocidas e iguales.
+
+## Hipótesis inicial
+
+$$H_0: \mu_{caribe} - \mu_{orquidea} = 0\\
+H_1: \mu_{caribe} - \mu_{orquidea} \neq 0$$
+
+## Nivel de significancia
+
+$$\alpha = 0.05$$
+
+## Estadístico calculado vs teórico
+
+$$T = \frac{\bar{X_1} - \bar{X_2} -\delta_0}{S_p/\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \sim\ t_{n_1+n_2-2}$$
+
+Donde:
+
+$$S_p^2 = \frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$$
+
+$$S_p^2 = \frac{(3-1)1.5275^2+(3-1)1.5275^2}{3+3-2}=2.33$$
+
+$$S_p = \sqrt{S_p^2}=\sqrt{2.33}=1.5275$$
+
+```{r, collapse=TRUE}
+# Obteniendo varianza ponderada sp
+var_sp <- ((2*1.5275^2)+(2*1.5275^2))/(3+3-2)
+var_sp
+
+# Desvición ponderada
+sqrt(var_sp)
+```
+
+$$T = \frac{\bar{X_1} - \bar{X_1} -\delta_0}{S_p/\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} = \frac{504.33 - 504.67 -0}{1.5275/\sqrt{\frac{1}{3}+\frac{1}{3}}} = -0.2677$$
+
+```{r}
+t_calculado <- (504.333-504.667)/(1.527525*(sqrt(1/3 + 1/3)))
+t_calculado
+```
+
+Este estadístico calculado deberá ser contrastado con los estadísticos teóricos: 
+
+$$t_{n_1+n_2-2,\ \alpha/2} = t_{3+3-2,\ 0.05/2} = t_{4,\ 0.025} = -2.776$$
+
+$$t_{n_1+n_2-2,\ 1-\alpha/2} = t_{3+3-2,\ 1-0.05/2} = t_{4,\ 0.025} = 2.776$$
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "t-student")
+x <- seq(-4, -2.262157, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -2.776), c(0, y, 0), col = "gray")
+x <- seq(2.776, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(2.776, x, 4), c(0, y, 0), col = "gray")
+abline(v = 2.776, col = "blue", lty = 2)
+abline(v = -2.776, col = "blue", lty = 2)
+abline(v = -0.27, col = "green3", lty = 2)
+text(x = -0.27, y = 0.09, labels = "-0.27", col = "green3")
+text(x = -2.776, y = 0.07, labels = "-2.776", col = "blue")
+text(x = 2.776, y = 0.07, labels = "2.776", col = "blue")
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+text(x = -3.211741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+text(x = 3.21741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+```
+
+**¿Cómo encuentro los estadísticos teóricos con R?**
+
+```{r, collapse=TRUE}
+# Valor del estadístico teórico que deja un área de 0.025 a la izquierda
+t_teo1 <- qt(p = 0.025, df = 4, lower.tail = TRUE)
+t_teo1
+
+# Valor del estadístico teórico que deja un área de 0.025 a la derecha
+t_teo2 <- qt(p = 0.025, df = 4, lower.tail = FALSE)
+t_teo2
+```
+
+## Intervalo de confianza y valor P
+
+  - Función `t.test()`: pruebas $t-student$ para una o dos medias.
+      - `x`: datos para $\mu_1$.
+      - `y`: datos para $\mu_2$.
+      - `mu`: valor de referencia en $H_0$
+      - `alternative`: tipo de hipótesis alternativa
+          - *"two.sided"*: prueba bilateral
+          - *"less"*: prueba unilateral izquierda
+          - *"great"* prueba unilateral derecha
+      - `conf.level`: nivel de confianza
+      - `var.equal`: homocedasticidad (igualdad de varianzas)
+
+```{r}
+t.test(x = caribe$Peso, y = orquidea$Peso, mu = 0, alternative = "two.sided", var.equal = TRUE,
+       conf.level = 0.95)
+```
+
