@@ -54,7 +54,7 @@ $$S_p = \frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$$
 1. Comprobar la normalidad y la homocedasticidad (igualdad de varianzas)s.
 2. Definir la hipótesis nula y alternativa.
 3. Calcular el estadístico
-$$t = \frac{\bar{x_1}-\bar{x_2}-\delta_0}{\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
+$$t = \frac{\bar{x_1}-\bar{x_2}-\delta_0}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}$$
 
 Donde $t \sim t_v$, con grados de libertad $v$:
 
