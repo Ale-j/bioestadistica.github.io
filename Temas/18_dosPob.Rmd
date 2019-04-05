@@ -39,7 +39,7 @@ tema_gg <- theme_linedraw() +
 
 1. Definir la hipóteis nula y alternativa
 3. Calcular el estadístico
-$$z = \frac{(\hat{p_1}-\hat{p_2})-(p_1-p_2)}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}}$$
+$$z = \frac{\hat{p_1}-\hat{p_2}}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}}$$
 4. Definir el error tipo I $\alpha$
 5. Calcular el valor P en una distribución $t-student$ con $n-1$ grados de libertad
 6. Comparar el valor P con $\alpha$ y concluir.

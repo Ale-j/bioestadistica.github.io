@@ -38,10 +38,12 @@ title: Temas
     - [Inferencia sobre la media](/Temas/15_UnaPob.pdf)
         - [Ejemplo con bolsas de arroz](/Temas/Ejemplo_Arroz.html)
     - [Inferencia sobre una proporción](/Temas/16_UnaPob.pdf)
+        - [Ejemplo con encuesta](/Temas/Ejemplo_p.html)
 - Inferencia sobre dos poblaciones:    
     - [Inferencia sobre dos medias](/Temas/17_dosPob.pdf)
         - [Ejemplo con bolsas de arroz](/Temas/Ejemplo_Arroz2.html)
     - [Inferencia sobre dos proporciones](/Temas/18_dosPob.pdf)
+        - [Ejemplo](/Temas/Ejemplo_p2.html)
     - [Inferencia sobre dos varianzas](/Temas/19_dosPob.pdf)
 - [Ejemplos de inferencia estadística](/Temas/20_ejemplos.html)      
 - [Tablas de contingencia](/Temas/21_tcontingencia.pdf)    

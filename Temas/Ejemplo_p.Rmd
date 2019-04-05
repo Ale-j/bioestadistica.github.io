@@ -1,0 +1,110 @@
+---
+title: "Ejemplo de inferencia sobre una proporción"
+subtitle: "Bioestadística 1"
+author: "Edimer David Jaramillo"
+date: "Abril de 2019"
+output:
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+```
+
+# Ejemplo
+
+- Con los resultados de la encuesta se pretende contrastar a través de hipótesis si la proporción de estudiantes con trabajo remunerado en la univerisdad es igual o diferente del 50%.
+
+# Datos
+
+```{r}
+encuesta <- read.csv("Encuesta.csv", dec = ",")
+```
+
+# Frecuencia absoluta de estudiantes con trabajo
+
+```{r}
+table(encuesta$Trabajo)
+```
+
+# Proporción de estudiantes con trabajo remunerado
+
+```{r}
+prop.table(table(encuesta$Trabajo))
+```
+
+# Gráfico 
+
+```{r}
+barplot(prop.table(table(encuesta$Trabajo)),
+        main = "Proporción de estudiantes con trabajo remunerado",
+        xlab = "¿Posee trabajo remunerado?", ylab = "Propoción")
+```
+
+# Hipótesis
+
+$$H_0: p_{trabajo} = 0.5 \\
+H_1: p_{trabajo} \neq 0.5$$
+
+# Nivel de significancia 
+
+$\alpha = 0.05$
+
+# Solución manual
+
+## Estadístico calculado
+
+$$Z_0 = \frac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}$$
+
+$$Z_0 = \frac{0.606-0.5}{\sqrt{\frac{0.5(1-0.5)}{33}}} = 1.2178$$
+
+```{r}
+# Estadístico calculado
+z_calculado <- (0.606-0.5)/sqrt((0.5 * 0.5)/33)
+z_calculado
+```
+
+## Estadístico teórico
+
+```{r}
+qnorm(p = 0.025, mean = 0, sd = 1, lower.tail = TRUE)
+qnorm(p = 0.025, mean = 0, sd = 1, lower.tail = FALSE)
+```
+
+## Región de rechazo
+
+```{r, echo=FALSE}
+x <- seq(-4, 4, length = 200)
+y <- dt(x, df = 47)
+plot(x, y, type = "l", lwd = 2, col = "red", main = "Normal estándar Z")
+x <- seq(-4, -1.959964, length = 200)
+y <- dt(x, df = 47)
+polygon(c(-4, x, -1.959964), c(0, y, 0), col = "gray")
+x <- seq(1.959964, 4, length = 200)
+y <- dt(x, df = 47)
+polygon(c(1.959964, x, 4), c(0, y, 0), col = "gray")
+abline(v = 1.959964, col = "blue", lty = 2)
+abline(v = -1.959964, col = "blue", lty = 2)
+abline(v = 1.211, col = "green3", lty = 2)
+text(x = 1.217847, y = 0.09, labels = "1.217847", col = "green3")
+text(x = -1.959964, y = 0.07, labels = "-1.959964", col = "blue")
+text(x = 1.959964, y = 0.07, labels = "1.959964", col = "blue")
+text(x = 0, y = 0.15, labels = "NO rechazo de H0", col = "black")
+text(x = -3.211741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+text(x = 3.21741, y = 0.3, labels = "Rechazo de H0", col = "blue")
+```
+
+## Intervalo de confianza y valor P
+
+- Función `prop.test()`
+    - `x:` número de casos exitosos.
+    - `n:` número total de casos.
+    - `p:` proporción a contrastar.
+    - `alternative:` tipo de hipótesis alternativa.
+    - `conf.level:` nivel de confianza.
+    
+```{r}
+prop.test(x = 20, n = 33, p = 0.5, alternative = "two.sided", conf.level = 0.95)
+```
+
