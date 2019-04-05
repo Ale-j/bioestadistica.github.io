@@ -44,6 +44,5 @@ title: Temas
         - [Ejemplo con bolsas de arroz](/Temas/Ejemplo_Arroz2.html)
     - [Inferencia sobre dos proporciones](/Temas/18_dosPob.pdf)
         - [Ejemplo](/Temas/Ejemplo_2p.html)
-    - [Inferencia sobre dos varianzas](/Temas/19_dosPob.pdf)
 - [Ejemplos de inferencia estadística](/Temas/20_ejemplos.html)      
 - [Tablas de contingencia](/Temas/21_tcontingencia.pdf)    
